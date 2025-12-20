@@ -184,16 +184,42 @@ export default function decorate(block) {
   content.className = 'overlay-content';
 
   if (overlayHTML) {
-    // use authored overlay HTML, but if authored HTML doesn't include a CTA and a runtime CTA exists, append one
-    content.innerHTML = overlayHTML;
-    const hasCtaInHtml = !!content.querySelector('.overlay-cta') || !!content.querySelector('a');
-    if (!hasCtaInHtml && runtimeCta) {
-      const cta = document.createElement('a');
-      cta.className = 'overlay-cta';
-      cta.href = runtimeCta;
-      // prefer provided CTA label; fall back to friendly default rather than raw URL
-      cta.textContent = (runtimeCtaText && !(runtimeCtaText === runtimeCta || /^https?:\/\//.test(runtimeCtaText) || runtimeCtaText.startsWith('/'))) ? runtimeCtaText : 'Shop Gifts';
-      content.appendChild(cta);
+    // If authored overlay contains AEM model nodes, convert them to our styled structure
+    const aueTitleNode = overlaySource && overlaySource.querySelector('[data-aue-prop="overlayText"]');
+    const aueCtaNode = overlaySource && (overlaySource.querySelector('[data-aue-prop="overlayCtaUrl"]') || overlaySource.querySelector('a'));
+    if (aueTitleNode) {
+      const title = document.createElement('h1');
+      title.className = 'overlay-title';
+      title.textContent = aueTitleNode.textContent.trim();
+      try { title.style.setProperty('font-size', '56pt', 'important'); } catch (e) { title.style.fontSize = '56pt'; }
+      content.appendChild(title);
+      // subtitle if present in authored HTML
+      const subtitleNode = overlaySource.querySelector('[data-aue-prop="overlaySubtitle"]');
+      if (subtitleNode) {
+        const subtitle = document.createElement('p');
+        subtitle.className = 'overlay-subtitle';
+        subtitle.textContent = subtitleNode.textContent.trim();
+        content.appendChild(subtitle);
+      }
+      // append CTA if available
+      if (runtimeCta || (aueCtaNode && aueCtaNode.getAttribute)) {
+        const cta = document.createElement('a');
+        cta.className = 'overlay-cta';
+        cta.href = runtimeCta || (aueCtaNode.getAttribute && aueCtaNode.getAttribute('href')) || '#';
+        cta.textContent = (runtimeCtaText && !(runtimeCtaText === runtimeCta || /^https?:\/\//.test(runtimeCtaText) || runtimeCtaText.startsWith('/'))) ? runtimeCtaText : (aueCtaNode && aueCtaNode.textContent && aueCtaNode.textContent.trim() && aueCtaNode.textContent.trim() !== cta.href ? aueCtaNode.textContent.trim() : 'Shop Gifts');
+        content.appendChild(cta);
+      }
+    } else {
+      // fallback: inject the raw authored HTML but ensure CTA is present
+      content.innerHTML = overlayHTML;
+      const hasCtaInHtml = !!content.querySelector('.overlay-cta') || !!content.querySelector('a');
+      if (!hasCtaInHtml && runtimeCta) {
+        const cta = document.createElement('a');
+        cta.className = 'overlay-cta';
+        cta.href = runtimeCta;
+        cta.textContent = (runtimeCtaText && !(runtimeCtaText === runtimeCta || /^https?:\/\//.test(runtimeCtaText) || runtimeCtaText.startsWith('/'))) ? runtimeCtaText : 'Shop Gifts';
+        content.appendChild(cta);
+      }
     }
   } else if (runtimeText) {
     // if model provided a single overlay text string, use it as the title
