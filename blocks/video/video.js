@@ -131,9 +131,34 @@ export default function decorate(block) {
   };
 
   const extracted = extractAnchor(overlaySource);
-  const runtimeCta = modelOverlayCta || (overlaySource && overlaySource.dataset && (overlaySource.dataset.cta || overlaySource.dataset.overlayCta)) || extracted.href || '';
-  const runtimeCtaText = modelOverlayCtaText || (overlaySource && overlaySource.dataset && (overlaySource.dataset.ctatext || overlaySource.dataset.overlayCtatext)) || extracted.text || '';
-  const runtimeText = modelOverlayText || (overlaySource && overlaySource.dataset && overlaySource.dataset.text) || '';
+  // also attempt to read model-rendered AEM nodes (they use data-aue-prop attributes)
+  const aueOverlayText = block.querySelector('[data-aue-prop="overlayText"]') && block.querySelector('[data-aue-prop="overlayText"]').textContent.trim();
+  const aueOverlayCta = block.querySelector('[data-aue-prop="overlayCtaUrl"]') && block.querySelector('[data-aue-prop="overlayCtaUrl"]').textContent.trim();
+  const aueOverlayCtaText = block.querySelector('[data-aue-prop="overlayCtaText"]') && block.querySelector('[data-aue-prop="overlayCtaText"]').textContent.trim();
+  const aueOverlayPosition = block.querySelector('[data-aue-prop="overlayPosition"]') && block.querySelector('[data-aue-prop="overlayPosition"]').textContent.trim();
+
+  // CTA: prefer model value, then overlay-scope anchor, then any anchor in the block that isn't the video source
+  let runtimeCta = modelOverlayCta || aueOverlayCta || (overlaySource && overlaySource.dataset && (overlaySource.dataset.cta || overlaySource.dataset.overlayCta)) || extracted.href || '';
+  let runtimeCtaText = modelOverlayCtaText || aueOverlayCtaText || (overlaySource && overlaySource.dataset && (overlaySource.dataset.ctatext || overlaySource.dataset.overlayCtatext)) || extracted.text || '';
+  const runtimeText = modelOverlayText || aueOverlayText || (overlaySource && overlaySource.dataset && overlaySource.dataset.text) || '';
+
+  if (!runtimeCta) {
+    // find any anchor in block that doesn't match the video link/source
+    const anchors = Array.from(block.querySelectorAll('a'));
+    for (let i = 0; i < anchors.length; i++) {
+      const a = anchors[i];
+      const href = a.getAttribute('href') || '';
+      if (!href) continue;
+      // skip if this looks like the video source we already used
+      if (href === link || href.includes('asset_video_manifest') || href.includes('youtube') || href.includes('v=')) continue;
+      runtimeCta = runtimeCta || href;
+      runtimeCtaText = runtimeCtaText || (a.textContent && a.textContent.trim()) || runtimeCtaText;
+      if (runtimeCta) break;
+    }
+  }
+
+  // position: prefer explicit aue value if present
+  const runtimePosition = modelOverlayPosition || aueOverlayPosition || (overlaySource && overlaySource.dataset && (overlaySource.dataset.position || overlaySource.dataset.overlayPosition)) || '';
 
   // always create overlay container (use provided content or default design)
   block.classList.add('has-overlay');
