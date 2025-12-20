@@ -85,9 +85,17 @@ const loadVideoEmbed = (block, link, autoplay, background) => {
 
 export default function decorate(block) {
   console.log("video component called successfully");
-  const linkEl = block.querySelector(':scope div:nth-child(1) > div a');
-  if (!linkEl) return;
-  const link = linkEl.innerHTML.trim();
+  // try to locate a link or source for the video. templates vary; be permissive.
+  const linkEl = block.querySelector(':scope div:nth-child(1) > div a') || block.querySelector(':scope a') || block.querySelector('video source') || block.querySelector('video');
+  // derive the link from common attributes (href, data-src, src) or innerHTML
+  let link = '';
+  if (linkEl) {
+    link = linkEl.getAttribute && (linkEl.getAttribute('href') || linkEl.getAttribute('data-src') || linkEl.getAttribute('data-video') || linkEl.getAttribute('data-video-url'))
+      || linkEl.src || linkEl.innerHTML && linkEl.innerHTML.trim() || '';
+  } else if (block.dataset) {
+    // fallback to model-rendered data attribute on the block
+    link = block.dataset.videoUrl || block.dataset.videourl || '';
+  }
   console.log('link', link);
 
   // capture optional overlay content before clearing block
