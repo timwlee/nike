@@ -94,20 +94,26 @@ export default function decorate(block) {
   const overlaySource = block.querySelector(':scope div:nth-child(2)');
   const overlayHTML = overlaySource ? overlaySource.innerHTML.trim() : '';
 
+  // read model-driven values if rendered as data attributes on the block
+  const modelOverlayText = (block.dataset && block.dataset.overlayText) || '';
+  const modelOverlayCta = (block.dataset && block.dataset.overlayCtaUrl) || '';
+  const modelOverlayPosition = (block.dataset && block.dataset.overlayPosition) || '';
+
   block.textContent = '';
   block.dataset.embedLoaded = false;
 
   // force autoplay, loop and hide controls for this block
   loadVideoEmbed(block, link, true, true);
 
-  // determine optional runtime config from data-attributes or overlay source
-  const runtimePosition = (block.dataset && block.dataset.overlayposition) || (overlaySource && overlaySource.dataset && overlaySource.dataset.position) || '';
-  const runtimeCta = (block.dataset && block.dataset.overlayctaul) || (overlaySource && overlaySource.dataset && overlaySource.dataset.cta) || '';
+  // determine optional runtime config from model data attributes or overlay source
+  const runtimePosition = modelOverlayPosition || (overlaySource && overlaySource.dataset && overlaySource.dataset.position) || '';
+  const runtimeCta = modelOverlayCta || (overlaySource && overlaySource.dataset && overlaySource.dataset.cta) || '';
+  const runtimeText = modelOverlayText || '';
 
   // always create overlay container (use provided content or default design)
   block.classList.add('has-overlay');
-  // add position class to block for CSS modifiers
-  const pos = runtimePosition || 'center';
+  // add position class to block for CSS modifiers; normalize to known values
+  const pos = (runtimePosition || 'center').replace(/ /g, '-');
   block.classList.add(`position-${pos}`);
 
   const overlay = document.createElement('div');
@@ -117,6 +123,20 @@ export default function decorate(block) {
 
   if (overlayHTML) {
     content.innerHTML = overlayHTML;
+  } else if (runtimeText) {
+    // if model provided a single overlay text string, use it as the title
+    const title = document.createElement('h1');
+    title.className = 'overlay-title';
+    title.textContent = runtimeText;
+    content.appendChild(title);
+    // optional CTA from model
+    if (runtimeCta) {
+      const cta = document.createElement('a');
+      cta.className = 'overlay-cta';
+      cta.href = runtimeCta;
+      cta.textContent = 'Shop Gifts';
+      content.appendChild(cta);
+    }
   } else {
     // Default markup matching provided design image
     const title = document.createElement('h1');

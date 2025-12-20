@@ -37,17 +37,14 @@
 
 .video .video-overlay {
   position: absolute;
-  pointer-events: none; /* This line remains unchanged */
+  inset: 0; /* cover the entire video area */
   display: flex;
   align-items: center;
   justify-content: center;
-  pointer-events: none;
   color: #fff;
   text-align: center;
   padding: 1rem;
   z-index: 2;
-  max-width: 90%; /* This line remains unchanged */
-  pointer-events: auto; /* Allow clicks on overlay content */
 }
 
 /* Default overlay design to match provided image */
