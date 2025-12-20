@@ -98,6 +98,7 @@ export default function decorate(block) {
   const modelOverlayText = (block.dataset && block.dataset.overlayText) || '';
   const modelOverlayCta = (block.dataset && block.dataset.overlayCtaUrl) || '';
   const modelOverlayPosition = (block.dataset && block.dataset.overlayPosition) || '';
+  const modelOverlayCtaText = (block.dataset && block.dataset.overlayCtaText) || '';
 
   block.textContent = '';
   block.dataset.embedLoaded = false;
@@ -108,6 +109,7 @@ export default function decorate(block) {
   // determine optional runtime config from model data attributes or overlay source
   const runtimePosition = modelOverlayPosition || (overlaySource && overlaySource.dataset && overlaySource.dataset.position) || '';
   const runtimeCta = modelOverlayCta || (overlaySource && overlaySource.dataset && overlaySource.dataset.cta) || '';
+  const runtimeCtaText = modelOverlayCtaText || (overlaySource && overlaySource.dataset && overlaySource.dataset.ctatext) || '';
   const runtimeText = modelOverlayText || '';
 
   // always create overlay container (use provided content or default design)
@@ -149,9 +151,9 @@ export default function decorate(block) {
 
     const cta = document.createElement('a');
     cta.className = 'overlay-cta';
-    // use runtime CTA if provided, otherwise default to '#'
+    // use runtime CTA URL and CTA Text if provided, otherwise fallback to model default or '#'
     cta.href = runtimeCta || '#';
-    cta.textContent = 'Shop Gifts';
+    cta.textContent = runtimeCtaText || 'Shop Gifts';
 
     const dots = document.createElement('div');
     dots.className = 'overlay-dots';
