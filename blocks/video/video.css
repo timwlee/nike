@@ -1,4 +1,4 @@
-.@font-face {
+@font-face {
   font-family: 'FuturaDisplay';
   src: url('/fonts/Futura_1.woff2') format('woff2');
   font-weight: 300;
@@ -36,6 +36,23 @@
   font-weight: 900;
   font-style: normal;
   font-display: swap;
+}
+
+/* Fallback for authored overlay markup that uses <p> instead of our `.overlay-title` */
+.video.has-overlay .video-overlay .overlay-content p,
+.video.has-overlay .video-overlay .overlay-content > div p {
+  font-family: 'FuturaDisplay', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial !important;
+  font-size: 56pt !important;
+  line-height: 0.95 !important;
+  margin: 0 0 0.25rem !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* Ensure CTA uses Futura and high specificity so site globals don't override */
+.video.has-overlay .video-overlay .overlay-cta {
+  font-family: 'FuturaDisplay', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial !important;
 }
 
 .video-container {
