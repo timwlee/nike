@@ -169,6 +169,21 @@ export default function decorate(block) {
     // ignore logging errors in older browsers
   }
 
+  // Temporary on-page debug badge (visible even when console is filtered)
+  try {
+    const dbg = document.createElement('div');
+    dbg.className = 'video-debug-badge';
+    dbg.setAttribute('aria-hidden', 'true');
+    dbg.style.cssText = 'position:fixed;bottom:12px;left:12px;background:rgba(0,0,0,0.76);color:#fff;padding:6px 8px;font-size:12px;z-index:2147483647;border-radius:4px;pointer-events:none;opacity:0.95;';
+    const label = (modelOverlayCtaText || aueOverlayCtaText || extraCtaText || runtimeCtaText) || '(none)';
+    dbg.textContent = `video CTA: "${label}" — href: ${runtimeCta || '(none)'} `;
+    // attach to document body so it's visible on the live page; auto-remove after 15s
+    (document.body || document.documentElement).appendChild(dbg);
+    setTimeout(() => { try { dbg.remove(); } catch (e) {} }, 15000);
+  } catch (e) {
+    // ignore DOM errors in restrictive contexts
+  }
+
   block.textContent = '';
   block.dataset.embedLoaded = false;
 
