@@ -314,8 +314,9 @@ export default function decorate(block) {
   overlay.appendChild(content);
   block.appendChild(overlay);
 
-  // If a model-provided CTA label exists anywhere, prefer it over authored/displayed CTA text
-  const preferredCtaLabel = modelOverlayCtaText || aueOverlayCtaText || extraCtaText || runtimeCtaText || '';
+  // HARD OVERRIDE: only replace CTA text when an explicit model (`data-overlay-cta-text`) or
+  // AEM `data-aue-prop="overlayCtaText"` value is present. Ignore generic buttons elsewhere.
+  const preferredCtaLabel = modelOverlayCtaText || aueOverlayCtaText || '';
   if (preferredCtaLabel) {
     if (!(preferredCtaLabel === runtimeCta || /^https?:\/\//.test(preferredCtaLabel) || preferredCtaLabel.startsWith('/'))) {
       const ctaEl = block.querySelector('.overlay-cta');
