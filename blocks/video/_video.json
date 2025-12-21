@@ -37,6 +37,14 @@
             "label": "Overlay Text"
           }
           ,
+           {
+            "component": "text",
+            "valueType": "string",
+            "required": false,
+            "name": "overlaySubText",
+            "label": "Overlay Text"
+          }
+          ,
           {
             "component": "text",
             "valueType": "string",

@@ -63,8 +63,89 @@ const loadVideoEmbed = (block, link) => {
 };
 
 export default function decorate(block) {
-  const link = block.querySelector(':scope div:nth-child(1) > div a').innerHTML.trim();
+  // Get the first, second, third, and fourth divs
+  const divs = block.querySelectorAll(':scope > div');
+  const videoDiv = divs[0];
+  const overlayDiv = divs[1];
+  const linkDiv = divs[2];
+  const labelDiv = divs[3];
+  // Get the video link from the first div
+  const link = videoDiv?.querySelector('a')?.innerHTML.trim() || '';
+  // Clear block and set up for embed
   block.textContent = '';
   block.dataset.embedLoaded = false;
   loadVideoEmbed(block, link);
+
+  // Make block position relative for overlay stacking
+  block.style.position = 'relative';
+
+  // Render the 2nd div as overlay if it exists
+  if (overlayDiv) {
+    const overlay = document.createElement('div');
+    overlay.className = 'video-text-overlay';
+    while (overlayDiv.firstChild) {
+      overlay.appendChild(overlayDiv.firstChild);
+    }
+    overlay.style.position = 'absolute';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100%';
+    overlay.style.height = '100%';
+    overlay.style.display = 'flex';
+    overlay.style.flexDirection = 'column';
+    overlay.style.justifyContent = 'center';
+    overlay.style.alignItems = 'center';
+    overlay.style.pointerEvents = 'none';
+    overlay.style.color = '#fff';
+    overlay.style.textShadow = '0 2px 8px rgba(0,0,0,0.7)';
+    overlay.style.zIndex = '2';
+    block.appendChild(overlay);
+  }
+
+  // Render the 3rd div as the link and the 4th div as the label overlay
+  if (linkDiv || labelDiv) {
+    const ctaOverlay = document.createElement('div');
+    ctaOverlay.className = 'video-cta-overlay';
+    ctaOverlay.style.position = 'absolute';
+    ctaOverlay.style.bottom = '32px';
+    ctaOverlay.style.left = '50%';
+    ctaOverlay.style.transform = 'translateX(-50%)';
+    ctaOverlay.style.display = 'flex';
+    ctaOverlay.style.flexDirection = 'column';
+    ctaOverlay.style.alignItems = 'center';
+    ctaOverlay.style.zIndex = '3';
+    ctaOverlay.style.pointerEvents = 'auto';
+
+    // 4th div value for label (used for link text)
+    let labelText = '';
+    if (labelDiv) {
+      labelText = labelDiv.textContent.trim();
+    }
+
+    // 3rd div is always the link
+    if (linkDiv) {
+      let linkEl = linkDiv.querySelector('a');
+      if (!linkEl) {
+        // If not an <a>, wrap content in a link
+        linkEl = document.createElement('a');
+        linkEl.href = '#';
+      }
+      linkEl.classList.add('video-cta-link');
+      // Replace link text with labelText if available
+      if (labelText) linkEl.textContent = labelText;
+      ctaOverlay.appendChild(linkEl);
+    }
+
+    // 4th div is always the label (optional, if you want to show it separately as well)
+    // If you want to show the label only as the link text, comment out the next block
+    // if (labelDiv) {
+    //   const labelContainer = document.createElement('div');
+    //   labelContainer.className = 'video-cta-label';
+    //   while (labelDiv.firstChild) {
+    //     labelContainer.appendChild(labelDiv.firstChild);
+    //   }
+    //   ctaOverlay.appendChild(labelContainer);
+    // }
+    block.appendChild(ctaOverlay);
+  }
 }
