@@ -38,7 +38,7 @@
 .video .video-text-overlay .overlay-subtitle {
   font-family: 'Futura', 'Futura PT', 'Avenir Next', 'Arial', 'Helvetica Neue', Arial, Helvetica, sans-serif !important;
   margin: 0 0 2.2rem 0;
-  font-style: bold;
+  font-weight: 900;
   font-size: 50pt;
   text-transform: uppercase;
   opacity: 1;
