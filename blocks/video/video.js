@@ -127,6 +127,41 @@ export default function decorate(block) {
   // try multiple possible attribute names that different templates might emit for CTA text
   const modelOverlayCtaText = (block.dataset && block.dataset.overlayCtaText) || block.getAttribute('data-overlay-cta-text') || block.getAttribute('data-overlayctatext') || block.getAttribute('data-cta-text') || '';
 
+  // attempt to find CTA text rendered elsewhere in the same section (some templates render model fields outside the overlay)
+  const findCtaTextInSection = (el) => {
+    try {
+      const section = el.closest && el.closest('.section') || document.body;
+      if (!section) return '';
+      // scan for model nodes, explicit data attrs, hidden nodes, or nodes with 'cta' / 'button' in class
+      const selectorList = '[data-aue-prop], [data-overlay-cta-text], [data-overlayctatext], [data-cta-text], [data-ctatext], [style*="display:none"], [hidden], [class*="cta"], [class*="button"]';
+      const candidates = Array.from(section.querySelectorAll(selectorList));
+      for (let i = 0; i < candidates.length; i++) {
+        const node = candidates[i];
+        // prefer explicit data-aue-prop matching overlayCtaText
+        const aue = node.getAttribute && node.getAttribute('data-aue-prop');
+        if (aue && aue.toLowerCase().includes('overlayctatext')) {
+          const txt = node.textContent && node.textContent.trim() || '';
+          if (txt && !(txt === modelOverlayCta || /^https?:\/\//.test(txt) || txt.startsWith('/'))) return txt;
+        }
+        // pick concise human text content from hidden or utility nodes
+        const txt = (node.getAttribute && node.getAttribute('content')) || (node.textContent && node.textContent.trim()) || '';
+        if (!txt) continue;
+        // ignore long blocks or urls
+        if (txt.length > 80) continue;
+        if (txt === modelOverlayCta) continue;
+        if (/^https?:\/\//.test(txt) || txt.startsWith('/')) continue;
+        // ignore generic 'true' / 'false' markers
+        if (/^(true|false)$/i.test(txt)) continue;
+        return txt;
+      }
+      return '';
+    } catch (e) {
+      return '';
+    }
+  };
+
+  const extraCtaText = findCtaTextInSection(block) || '';
+
   block.textContent = '';
   block.dataset.embedLoaded = false;
 
@@ -279,12 +314,12 @@ export default function decorate(block) {
   overlay.appendChild(content);
   block.appendChild(overlay);
 
-  // If a model-provided CTA label exists, prefer it over authored/displayed CTA text
-  if (modelOverlayCtaText || aueOverlayCtaText || runtimeCtaText) {
-    const preferred = modelOverlayCtaText || aueOverlayCtaText || runtimeCtaText || '';
-    if (preferred && !(preferred === runtimeCta || /^https?:\/\//.test(preferred) || preferred.startsWith('/'))) {
+  // If a model-provided CTA label exists anywhere, prefer it over authored/displayed CTA text
+  const preferredCtaLabel = modelOverlayCtaText || aueOverlayCtaText || extraCtaText || runtimeCtaText || '';
+  if (preferredCtaLabel) {
+    if (!(preferredCtaLabel === runtimeCta || /^https?:\/\//.test(preferredCtaLabel) || preferredCtaLabel.startsWith('/'))) {
       const ctaEl = block.querySelector('.overlay-cta');
-      if (ctaEl) ctaEl.textContent = preferred;
+      if (ctaEl) ctaEl.textContent = preferredCtaLabel;
     }
   }
 }
