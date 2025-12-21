@@ -77,7 +77,8 @@ export default function decorate(block) {
   loadVideoEmbed(block, link);
 
   // Make block position relative for overlay stacking
-  block.style.position = 'relative';
+  block.classList.add('has-overlay');
+  block.classList.add('position-center');
 
   // Render the 2nd div as overlay if it exists
   if (overlayDiv) {
@@ -86,19 +87,6 @@ export default function decorate(block) {
     while (overlayDiv.firstChild) {
       overlay.appendChild(overlayDiv.firstChild);
     }
-    overlay.style.position = 'absolute';
-    overlay.style.top = '0';
-    overlay.style.left = '0';
-    overlay.style.width = '100%';
-    overlay.style.height = '100%';
-    overlay.style.display = 'flex';
-    overlay.style.flexDirection = 'column';
-    overlay.style.justifyContent = 'center';
-    overlay.style.alignItems = 'center';
-    overlay.style.pointerEvents = 'none';
-    overlay.style.color = '#fff';
-    overlay.style.textShadow = '0 2px 8px rgba(0,0,0,0.7)';
-    overlay.style.zIndex = '2';
     block.appendChild(overlay);
   }
 
@@ -109,15 +97,6 @@ export default function decorate(block) {
     while (linkDiv.firstChild) {
       subtextOverlay.appendChild(linkDiv.firstChild);
     }
-    subtextOverlay.style.position = 'absolute';
-    subtextOverlay.style.left = '50%';
-    subtextOverlay.style.top = '60%';
-    subtextOverlay.style.transform = 'translateX(-50%)';
-    subtextOverlay.style.zIndex = '3';
-    subtextOverlay.style.pointerEvents = 'none';
-    subtextOverlay.style.color = '#fff';
-    subtextOverlay.style.textShadow = '0 2px 8px rgba(0,0,0,0.7)';
-    subtextOverlay.style.fontSize = '1.25rem';
     block.appendChild(subtextOverlay);
   }
 
@@ -143,19 +122,6 @@ export default function decorate(block) {
     linkOverlay.className = 'video-link-overlay';
     linkOverlay.href = href;
     linkOverlay.textContent = linkText || href;
-    // Style overlay for positioning
-    linkOverlay.style.position = 'absolute';
-    linkOverlay.style.bottom = '32px';
-    linkOverlay.style.left = '50%';
-    linkOverlay.style.transform = 'translateX(-50%)';
-    linkOverlay.style.zIndex = '4';
-    linkOverlay.style.pointerEvents = 'auto';
-    linkOverlay.style.color = '#fff';
-    linkOverlay.style.background = 'rgba(0,0,0,0.5)';
-    linkOverlay.style.padding = '0.5em 1em';
-    linkOverlay.style.borderRadius = '24px';
-    linkOverlay.style.textDecoration = 'none';
-    linkOverlay.style.fontWeight = 'bold';
     block.appendChild(linkOverlay);
   }
 }

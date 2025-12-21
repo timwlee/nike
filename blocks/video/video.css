@@ -1,3 +1,80 @@
+/* --- Custom overlay styles to match Nike hero image --- */
+.video .video-text-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.video .video-text-overlay h1,
+.video .video-text-overlay .overlay-title {
+  font-weight: 900;
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  line-height: 0.85;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin: 0 0 0.5rem 0;
+  font-family: 'Arial Black', 'Helvetica Black', Impact, sans-serif;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+}
+
+.video .video-text-overlay p,
+.video .video-text-overlay .overlay-subtitle {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.25rem;
+  opacity: 0.95;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+}
+
+.video .video-subtext-overlay {
+  position: absolute;
+  left: 50%;
+  top: calc(50% + 2.5em);
+  transform: translateX(-50%);
+  z-index: 3;
+  pointer-events: none;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+  font-size: 1.25rem;
+  margin-bottom: 1.5em;
+  text-align: center;
+}
+
+.video .video-link-overlay {
+  position: absolute;
+  bottom: calc(32px + 2em);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  pointer-events: auto;
+  color: #222;
+  background: #fff;
+  padding: 0.75em 2em;
+  border-radius: 32px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  border: none;
+  transition: background 0.2s, color 0.2s;
+  display: inline-block;
+  text-align: center;
+}
+.video .video-link-overlay:hover,
+.video .video-link-overlay:focus {
+  background: #222;
+  color: #fff;
+}
+/* --- End custom overlay styles --- */
 
 .video-container {
   display: block;
