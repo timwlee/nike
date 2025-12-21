@@ -1,3 +1,11 @@
+/* Use Futura font for all video overlay text */
+.video .video-text-overlay,
+.video .video-text-overlay *,
+.video .video-subtext-overlay,
+.video .video-subtext-overlay *,
+.video .video-link-overlay {
+  font-family: 'Futura', 'Futura PT', 'Avenir Next', 'Arial', 'Helvetica Neue', Arial, Helvetica, sans-serif !important;
+}
 /* --- Custom overlay styles to match Nike hero image --- */
 .video .video-text-overlay {
   position: absolute;
