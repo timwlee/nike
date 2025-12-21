@@ -41,7 +41,7 @@ function embedYoutube(url, autoplay, background) {
   return temp.children.item(0);
 }
 
-function getVideoElement(source, autoplay, background) {
+function getVideoElement(source) {
   const video = document.createElement('video');
   // remove controls, enable autoplay, loop and muted for reliable autoplay
   video.removeAttribute('controls');
@@ -59,7 +59,7 @@ function getVideoElement(source, autoplay, background) {
 
   const sourceEl = document.createElement('source');
   sourceEl.setAttribute('src', source);
-  sourceEl.setAttribute('type', `video/mp4`);
+  sourceEl.setAttribute('type', 'video/mp4');
   video.append(sourceEl);
 
   return video;
@@ -84,19 +84,19 @@ const loadVideoEmbed = (block, link, autoplay, background) => {
 };
 
 export default function decorate(block) {
-  console.log("video component called successfully");
+  // video component initialized
   // try to locate a link or source for the video. templates vary; be permissive.
   const linkEl = block.querySelector(':scope div:nth-child(1) > div a') || block.querySelector(':scope a') || block.querySelector('video source') || block.querySelector('video');
   // derive the link from common attributes (href, data-src, src) or innerHTML
   let link = '';
   if (linkEl) {
-    link = linkEl.getAttribute && (linkEl.getAttribute('href') || linkEl.getAttribute('data-src') || linkEl.getAttribute('data-video') || linkEl.getAttribute('data-video-url'))
-      || linkEl.src || linkEl.innerHTML && linkEl.innerHTML.trim() || '';
+    link = (linkEl.getAttribute && (linkEl.getAttribute('href') || linkEl.getAttribute('data-src') || linkEl.getAttribute('data-video') || linkEl.getAttribute('data-video-url')))
+      || linkEl.src || (linkEl.innerHTML && linkEl.innerHTML.trim()) || '';
   } else if (block.dataset) {
     // fallback to model-rendered data attribute on the block
     link = block.dataset.videoUrl || block.dataset.videourl || '';
   }
-  console.log('link', link);
+  // link debug removed
 
   // capture optional overlay content before clearing block
   const overlaySource = block.querySelector(':scope div:nth-child(2)');
@@ -130,29 +130,34 @@ export default function decorate(block) {
   // attempt to find CTA text rendered elsewhere in the same section (some templates render model fields outside the overlay)
   const findCtaTextInSection = (el) => {
     try {
-      const section = el.closest && el.closest('.section') || document.body;
+      const section = (el.closest && el.closest('.section')) || document.body;
       if (!section) return '';
       // scan for model nodes, explicit data attrs, hidden nodes, or nodes with 'cta' / 'button' in class
       const selectorList = '[data-aue-prop], [data-overlay-cta-text], [data-overlayctatext], [data-cta-text], [data-ctatext], [style*="display:none"], [hidden], [class*="cta"], [class*="button"]';
       const candidates = Array.from(section.querySelectorAll(selectorList));
-      for (let i = 0; i < candidates.length; i++) {
+          for (let i = 0; i < candidates.length; i += 1) {
         const node = candidates[i];
         // prefer explicit data-aue-prop matching overlayCtaText
         const aue = node.getAttribute && node.getAttribute('data-aue-prop');
         if (aue && aue.toLowerCase().includes('overlayctatext')) {
-          const txt = node.textContent && node.textContent.trim() || '';
+          const txt = (node.textContent && node.textContent.trim()) || '';
           if (txt && !(txt === modelOverlayCta || /^https?:\/\//.test(txt) || txt.startsWith('/'))) return txt;
         }
         // pick concise human text content from hidden or utility nodes
         const txt = (node.getAttribute && node.getAttribute('content')) || (node.textContent && node.textContent.trim()) || '';
-        if (!txt) continue;
-        // ignore long blocks or urls
-        if (txt.length > 80) continue;
-        if (txt === modelOverlayCta) continue;
-        if (/^https?:\/\//.test(txt) || txt.startsWith('/')) continue;
-        // ignore generic 'true' / 'false' markers
-        if (/^(true|false)$/i.test(txt)) continue;
-        return txt;
+              if (!txt) {
+                // skip
+              } else if (txt.length > 80) {
+                // skip
+              } else if (txt === modelOverlayCta) {
+                // skip
+              } else if (/^https?:\/\//.test(txt) || txt.startsWith('/')) {
+                // skip
+              } else if (/^(true|false)$/i.test(txt)) {
+                // skip
+              } else {
+                return txt;
+              }
       }
       return '';
     } catch (e) {
@@ -164,7 +169,7 @@ export default function decorate(block) {
 
   // Diagnostic logs to help debug where the CTA label is coming from at runtime
   try {
-    console.log('video: modelOverlayCtaText=', modelOverlayCtaText, 'aueOverlayCtaText=', aueOverlayCtaText, 'extraCtaText=', extraCtaText, 'runtimeCtaText=', runtimeCtaText, 'runtimeCta=', runtimeCta);
+    // debug: video CTA text and links removed
   } catch (e) {
     // ignore logging errors in older browsers
   }
@@ -216,19 +221,19 @@ export default function decorate(block) {
 
   if (!runtimeCta) {
     // find any anchor captured earlier in the block that doesn't match the video link/source
-    for (let i = 0; i < preAnchors.length; i++) {
+    for (let i = 0; i < preAnchors.length; i += 1) {
       const a = preAnchors[i];
       const href = a.getAttribute('href') || '';
-      if (!href) continue;
-      if (href === link || href.includes('asset_video_manifest') || href.includes('youtube') || href.includes('v=')) continue;
-      runtimeCta = runtimeCta || href;
-      runtimeCtaText = runtimeCtaText || (a.textContent && a.textContent.trim()) || runtimeCtaText;
-      if (runtimeCta) break;
+      if (!href) {
+        // skip
+      } else if (href === link || href.includes('asset_video_manifest') || href.includes('youtube') || href.includes('v=')) {
+        // skip
+      } else {
+        runtimeCta = runtimeCta || href;
+        runtimeCtaText = runtimeCtaText || (a.textContent && a.textContent.trim()) || runtimeCtaText;
+        if (runtimeCta) { break; }
+      }
     }
-  }
-
-  // position: prefer explicit aue value if present
-  const runtimePosition = modelOverlayPosition || aueOverlayPosition || (overlaySource && overlaySource.dataset && (overlaySource.dataset.position || overlaySource.dataset.overlayPosition)) || '';
 
   // always create overlay container (use provided content or default design)
   block.classList.add('has-overlay');
@@ -264,7 +269,13 @@ export default function decorate(block) {
         const cta = document.createElement('a');
         cta.className = 'overlay-cta';
         cta.href = runtimeCta || (aueCtaNode.getAttribute && aueCtaNode.getAttribute('href')) || '#';
-        cta.textContent = (runtimeCtaText && !(runtimeCtaText === runtimeCta || /^https?:\/\//.test(runtimeCtaText) || runtimeCtaText.startsWith('/'))) ? runtimeCtaText : (aueCtaNode && aueCtaNode.textContent && aueCtaNode.textContent.trim() && aueCtaNode.textContent.trim() !== cta.href ? aueCtaNode.textContent.trim() : 'Shop Gdifts');
+        if (runtimeCtaText && !(runtimeCtaText === runtimeCta || /^https?:\/\//.test(runtimeCtaText) || runtimeCtaText.startsWith('/'))) {
+          cta.textContent = runtimeCtaText;
+        } else if (aueCtaNode && aueCtaNode.textContent && aueCtaNode.textContent.trim() && aueCtaNode.textContent.trim() !== cta.href) {
+          cta.textContent = aueCtaNode.textContent.trim();
+        } else {
+          cta.textContent = 'Shop Gifts';
+        }
         content.appendChild(cta);
       }
     } else {
@@ -275,7 +286,11 @@ export default function decorate(block) {
         const cta = document.createElement('a');
         cta.className = 'overlay-cta';
         cta.href = runtimeCta;
-        cta.textContent = (runtimeCtaText && !(runtimeCtaText === runtimeCta || /^https?:\/\//.test(runtimeCtaText) || runtimeCtaText.startsWith('/'))) ? runtimeCtaText : 'Shop Gifsts';
+        if (runtimeCtaText && !(runtimeCtaText === runtimeCta || /^https?:\/\//.test(runtimeCtaText) || runtimeCtaText.startsWith('/'))) {
+          cta.textContent = runtimeCtaText;
+        } else {
+          cta.textContent = 'Shop Gifts';
+        }
         content.appendChild(cta);
       }
     }
@@ -296,7 +311,11 @@ export default function decorate(block) {
       const cta = document.createElement('a');
       cta.className = 'overlay-cta';
       cta.href = runtimeCta;
-      cta.textContent = (runtimeCtaText && !(runtimeCtaText === runtimeCta || /^https?:\/\//.test(runtimeCtaText) || runtimeCtaText.startsWith('/'))) ? runtimeCtaText : 'Shop Gifts';
+      if (runtimeCtaText && !(runtimeCtaText === runtimeCta || /^https?:\/\//.test(runtimeCtaText) || runtimeCtaText.startsWith('/'))) {
+        cta.textContent = runtimeCtaText;
+      } else {
+        cta.textContent = 'Shop Gifts';
+      }
       content.appendChild(cta);
     }
   } else {
@@ -322,10 +341,14 @@ export default function decorate(block) {
 
     const dots = document.createElement('div');
     dots.className = 'overlay-dots';
-    for (let i = 0; i < 3; i++) {
-      const dot = document.createElement('span');
-      dots.appendChild(dot);
-    }
+      for (let i = 0; i < 3; i++) {
+        const dot = document.createElement('span');
+        if (dot) {
+          dots.appendChild(dot);
+        } else {
+          // Handle the case where dot is not created
+        }
+      }
 
     content.appendChild(title);
     content.appendChild(subtitle);
@@ -345,8 +368,8 @@ export default function decorate(block) {
       inlineDbg.style.cssText = 'display:inline-block;margin-left:8px;background:rgba(255,255,255,0.08);color:#fff;padding:2px 6px;border-radius:3px;font-size:11px;vertical-align:middle;pointer-events:none;';
       const label = (modelOverlayCtaText || aueOverlayCtaText || extraCtaText || runtimeCtaText) || '(none)';
       inlineDbg.textContent = `CTA: ${label}`;
-      ctaEl.parentNode && ctaEl.parentNode.insertBefore(inlineDbg, ctaEl.nextSibling);
-      setTimeout(() => { try { inlineDbg.remove(); } catch (e) {} }, 15000);
+      if (ctaEl.parentNode) { ctaEl.parentNode.insertBefore(inlineDbg, ctaEl.nextSibling); }
+      setTimeout(() => { try { inlineDbg.remove(); } catch (e) { /* ignore */ } }, 15000);
     }
   } catch (e) {
     // ignore
@@ -355,12 +378,12 @@ export default function decorate(block) {
   // Set up a MutationObserver to re-apply CTA override if the block is updated later (e.g., authoring runtime)
   try {
     // avoid adding multiple observers if decorate runs more than once
-    if (!block.__videoCtaObserver) {
+    if (!block.videoCtaObserver) {
       const applyCtaOverride = () => {
         try {
           const modelTextNow = (block.dataset && block.dataset.overlayCtaText) || block.getAttribute('data-overlay-cta-text') || '';
           const aueNodeNow = block.querySelector && block.querySelector('[data-aue-prop="overlayCtaText"]');
-          const aueTextNow = aueNodeNow && aueNodeNow.textContent && aueNodeNow.textContent.trim() || '';
+          const aueTextNow = (aueNodeNow && aueNodeNow.textContent && aueNodeNow.textContent.trim()) || '';
           const preferredNow = modelTextNow || aueTextNow || '';
           const ctaElNow = block.querySelector && block.querySelector('.overlay-cta');
           if (preferredNow && ctaElNow && !(preferredNow === runtimeCta || /^https?:\/\//.test(preferredNow) || preferredNow.startsWith('/'))) {
@@ -381,10 +404,10 @@ export default function decorate(block) {
           // re-evaluate potential model nodes in the block and surrounding section
           const modelTextNow = (block.dataset && block.dataset.overlayCtaText) || block.getAttribute('data-overlay-cta-text') || '';
           const aueNodeNow = block.querySelector && (block.querySelector('[data-aue-prop="overlayCtaText"]') || block.querySelector('[data-aue-prop="linkText"]'));
-          let aueTextNow = aueNodeNow && aueNodeNow.textContent && aueNodeNow.textContent.trim() || '';
+          let aueTextNow = (aueNodeNow && aueNodeNow.textContent && aueNodeNow.textContent.trim()) || '';
           // also check nearby section for common button model fields like linkText
           if (!aueTextNow) {
-            const section = block.closest && block.closest('.section') || document.body;
+            const section = (block.closest && block.closest('.section')) || document.body;
             if (section) {
               const alt = section.querySelector('[data-aue-prop="linkText"], [data-link-text], [data-linktext], [data-linktext]');
               if (alt) aueTextNow = (alt.textContent && alt.textContent.trim()) || aueTextNow;
@@ -416,7 +439,7 @@ export default function decorate(block) {
           clearInterval(lifetimeInterval);
         }
       }, 5000);
-      block.__videoCtaObserver = mo;
+      block.videoCtaObserver = mo;
     }
   } catch (e) {
     // ignore observer errors
