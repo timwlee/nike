@@ -1,60 +1,79 @@
-function loadVideoEmbed() {}
+function embedYoutube(url, autoplay, background) {
+  const usp = new URLSearchParams(url.search);
+  let suffix = '';
+  if (background || autoplay) {
+    const suffixParams = {
+      autoplay: autoplay ? '1' : '0',
+      mute: background ? '1' : '0',
+      controls: background ? '0' : '1',
+      disablekb: background ? '1' : '0',
+      loop: background ? '1' : '0',
+      playsinline: background ? '1' : '0',
+    };
+    suffix = `&${Object.entries(suffixParams).map(([k, v]) => `${k}=${encodeURIComponent(v)}`).join('&')}`;
+  }
+  let vid = usp.get('v') ? encodeURIComponent(usp.get('v')) : '';
+  const embed = url.pathname;
+  if (url.origin.includes('youtu.be')) {
+    [, vid] = url.pathname.split('/');
+  }
+
+  const temp = document.createElement('div');
+  temp.innerHTML = `<div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;">
+      <iframe src="https://www.youtube.com${vid ? `/embed/${vid}?rel=0&v=${vid}${suffix}` : embed}" style="border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;" 
+      allow="autoplay; fullscreen; picture-in-picture; encrypted-media; accelerometer; gyroscope; picture-in-picture" allowfullscreen="" scrolling="no" title="Content from Youtube" loading="lazy"></iframe>
+    </div>`;
+  return temp.children.item(0);
+}
+
+function getVideoElement(source, autoplay, background) {
+  const video = document.createElement('video');
+  video.setAttribute('controls', '');
+  if (autoplay) video.setAttribute('autoplay', '');
+  if (background) {
+    video.setAttribute('loop', '');
+    video.setAttribute('playsinline', '');
+    video.removeAttribute('controls');
+    video.addEventListener('canplay', () => {
+      video.muted = true;
+      if (autoplay) video.play();
+    });
+  }
+
+  const sourceEl = document.createElement('source');
+  sourceEl.setAttribute('src', source);
+  sourceEl.setAttribute('type', `video/mp4`);
+  video.append(sourceEl);
+
+  return video;
+}
+
+const loadVideoEmbed = (block, link, autoplay, background) => {
+  const isYoutube = link.includes('youtube') || link.includes('youtu.be');
+  if (isYoutube) {
+    const url = new URL(link);
+    const embedWrapper = embedYoutube(url, autoplay, background);
+    block.append(embedWrapper);
+    embedWrapper.querySelector('iframe').addEventListener('load', () => {
+      block.dataset.embedLoaded = true;
+    });
+  } else {
+    const videoEl = getVideoElement(link, autoplay, background);
+    block.append(videoEl);
+    videoEl.addEventListener('canplay', () => {
+      block.dataset.embedLoaded = true;
+    });
+  }
+};
 
 export default function decorate(block) {
-  // Find a video link in the block
-  const linkEl = block.querySelector('a, video, source');
-  const link = linkEl && (linkEl.href || linkEl.src || linkEl.getAttribute('href') || linkEl.getAttribute('src'));
-  // force autoplay, loop and hide controls for this block
-  loadVideoEmbed(block, link, true, true);
-
-  // Always create overlay container matching the design
-  block.classList.add('has-overlay');
-  block.classList.add('position-center');
-
-  const overlay = document.createElement('div');
-  overlay.className = 'video-overlay';
-  const content = document.createElement('div');
-  content.className = 'overlay-content';
-
-  // Try to find dynamic elements inside the block
-  const foundTitle = block.querySelector('h1, .overlay-title');
-  const foundSubtitle = block.querySelector('p, .overlay-subtitle');
-  const foundCta = block.querySelector('a, .overlay-cta, button');
-
-  // Title
-  const title = document.createElement('h1');
-  title.className = 'overlay-title';
-  title.textContent = foundTitle ? foundTitle.textContent.trim() : 'GYM-READY GIFTS';
-  try {
-    title.style.setProperty('font-size', '56pt', 'important');
-  } catch (e) {
-    title.style.fontSize = '56pt';
-  }
-  content.appendChild(title);
-
-  // Subtitle
-  const subtitle = document.createElement('p');
-  subtitle.className = 'overlay-subtitle';
-  subtitle.textContent = foundSubtitle ? foundSubtitle.textContent.trim() : 'Fuel their routine with the best workout styles.';
-  content.appendChild(subtitle);
-
-  // Button
-  const cta = document.createElement('a');
-  cta.className = 'overlay-cta';
-  cta.href = foundCta && foundCta.getAttribute('href') ? foundCta.getAttribute('href') : '#';
-  cta.textContent = foundCta ? foundCta.textContent.trim() : 'Shop Gifts';
-  cta.style.marginTop = '16px';
-  content.appendChild(cta);
-
-  // Dots
-  const dots = document.createElement('div');
-  dots.className = 'overlay-dots';
-  for (let i = 0; i < 3; i += 1) {
-    const dot = document.createElement('span');
-    dots.appendChild(dot);
-  }
-  content.appendChild(dots);
-
-  overlay.appendChild(content);
-  block.appendChild(overlay);
+  console.log("video component called successfully");
+  const link = block.querySelector(':scope div:nth-child(1) > div a').innerHTML.trim();
+  console.log("link", link);
+  //const link = block.querySelector(':scope div:nth-child(1) > div a').innerHTML.trim();
+  block.textContent = '';
+  block.dataset.embedLoaded = false;
+  const autoplay = block.classList ? block.classList.contains('autoplay') : false;
+  const playOnLoad = block.classList ? block.classList.contains('playonload') : false;
+  loadVideoEmbed(block, link, playOnLoad, autoplay);
 }
