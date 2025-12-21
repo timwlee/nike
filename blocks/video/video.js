@@ -375,15 +375,47 @@ export default function decorate(block) {
       };
 
       let debounceTimer;
+      // wrapped apply that also looks for nearby button/link model nodes (common AEM naming)
+      const extendedApply = () => {
+        try {
+          // re-evaluate potential model nodes in the block and surrounding section
+          const modelTextNow = (block.dataset && block.dataset.overlayCtaText) || block.getAttribute('data-overlay-cta-text') || '';
+          const aueNodeNow = block.querySelector && (block.querySelector('[data-aue-prop="overlayCtaText"]') || block.querySelector('[data-aue-prop="linkText"]'));
+          let aueTextNow = aueNodeNow && aueNodeNow.textContent && aueNodeNow.textContent.trim() || '';
+          // also check nearby section for common button model fields like linkText
+          if (!aueTextNow) {
+            const section = block.closest && block.closest('.section') || document.body;
+            if (section) {
+              const alt = section.querySelector('[data-aue-prop="linkText"], [data-link-text], [data-linktext], [data-linktext]');
+              if (alt) aueTextNow = (alt.textContent && alt.textContent.trim()) || aueTextNow;
+            }
+          }
+          const preferredNow = modelTextNow || aueTextNow || '';
+          const ctaElNow = block.querySelector && block.querySelector('.overlay-cta');
+          if (preferredNow && ctaElNow && !(preferredNow === runtimeCta || /^https?:\/\//.test(preferredNow) || preferredNow.startsWith('/'))) {
+            ctaElNow.textContent = preferredNow;
+          }
+          const inlineDbgNow = block.querySelector && block.querySelector('.video-debug-inline');
+          if (inlineDbgNow) inlineDbgNow.textContent = `CTA: ${preferredNow || '(none)'}`;
+        } catch (e) {
+          // ignore
+        }
+      };
+
       const mo = new MutationObserver(() => {
         clearTimeout(debounceTimer);
-        debounceTimer = setTimeout(() => applyCtaOverride(), 150);
+        debounceTimer = setTimeout(() => extendedApply(), 150);
       });
       mo.observe(block, { attributes: true, childList: true, subtree: true });
-      // auto-disconnect after 20s to avoid long-lived observers in production
-      setTimeout(() => {
-        try { mo.disconnect(); } catch (e) {}
-      }, 20000);
+      // extend observer lifetime to 2 minutes to catch late authoring runtime updates
+      const maxLifetime = 2 * 60 * 1000;
+      const killAt = Date.now() + maxLifetime;
+      const lifetimeInterval = setInterval(() => {
+        if (Date.now() > killAt) {
+          try { mo.disconnect(); } catch (e) {}
+          clearInterval(lifetimeInterval);
+        }
+      }, 5000);
       block.__videoCtaObserver = mo;
     }
   } catch (e) {
