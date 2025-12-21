@@ -44,7 +44,7 @@
 }
 
 .cards > ul > li {
-  border: 1px solid var(--accent-background-color);
+  /* border: 1px solid var(--accent-background-color); */
   background-color: var(--accent-background-color);
   overflow: hidden;
 }
