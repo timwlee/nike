@@ -242,7 +242,7 @@ export default function decorate(block) {
         const cta = document.createElement('a');
         cta.className = 'overlay-cta';
         cta.href = runtimeCta || (aueCtaNode.getAttribute && aueCtaNode.getAttribute('href')) || '#';
-        cta.textContent = (runtimeCtaText && !(runtimeCtaText === runtimeCta || /^https?:\/\//.test(runtimeCtaText) || runtimeCtaText.startsWith('/'))) ? runtimeCtaText : (aueCtaNode && aueCtaNode.textContent && aueCtaNode.textContent.trim() && aueCtaNode.textContent.trim() !== cta.href ? aueCtaNode.textContent.trim() : 'Shop Gifts');
+        cta.textContent = (runtimeCtaText && !(runtimeCtaText === runtimeCta || /^https?:\/\//.test(runtimeCtaText) || runtimeCtaText.startsWith('/'))) ? runtimeCtaText : (aueCtaNode && aueCtaNode.textContent && aueCtaNode.textContent.trim() && aueCtaNode.textContent.trim() !== cta.href ? aueCtaNode.textContent.trim() : 'Shop Gdifts');
         content.appendChild(cta);
       }
     } else {
