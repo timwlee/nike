@@ -4,7 +4,7 @@
 .video .video-subtext-overlay,
 .video .video-subtext-overlay *,
 .video .video-link-overlay {
-  font-family: 'Futura', 'Futura PT', 'Avenir Next', 'Arial', 'Helvetica Neue', Arial, Helvetica, sans-serif !important;
+  font-family: 'Futura ND', 'Futura', 'Futura PT', 'Avenir Next', 'Arial', 'Helvetica Neue', Arial, Helvetica, sans-serif !important;
 }
 /* --- Custom overlay styles to match Nike hero image --- */
 .video .video-text-overlay {
@@ -23,7 +23,7 @@
 
 .video .video-text-overlay h1,
 .video .video-text-overlay .overlay-title {
-  font-family: 'Futura', 'Futura PT', 'Avenir Next', 'Arial', 'Helvetica Neue', Arial, Helvetica, sans-serif !important;
+  font-family: 'Futura ND', 'Futura PT', 'Avenir Next', 'Arial', 'Helvetica Neue', Arial, Helvetica, sans-serif !important;
   font-weight: 900;
   font-size: clamp(3.5rem, 8vw, 7rem);
   line-height: 1.05;
@@ -36,10 +36,10 @@
 
 .video .video-text-overlay p,
 .video .video-text-overlay .overlay-subtitle {
-  font-family: 'Futura', 'Futura PT', 'Avenir Next', 'Arial', 'Helvetica Neue', Arial, Helvetica, sans-serif !important;
+  font-family: 'Futura ND', 'Futura PT', 'Avenir Next', 'Arial', 'Helvetica Neue', Arial, Helvetica, sans-serif !important;
   margin: 0 0 2.2rem 0;
   font-weight: 900;
-  font-size: 50pt;
+  font-size: 6rem;
   text-transform: uppercase;
   opacity: 1;
   color: #fff;
