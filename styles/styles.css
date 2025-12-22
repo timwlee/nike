@@ -795,8 +795,7 @@ main .section.bg-theme {
 }
 main .section.bg-dark {
   background-color: var(--dark-color);
-  color: var(--text-light); 
-  display: flex;
+  color: var(--text-light)
 }
 main .section.bg-light {
   background-color: var(--light-color);
