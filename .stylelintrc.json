@@ -1,3 +1,12 @@
 {
+<<<<<<< HEAD
   "extends": ["stylelint-config-standard"]
+=======
+  "extends": [
+    "stylelint-config-standard"
+  ],
+  "rules": {
+    "declaration-block-no-redundant-longhand-properties": null
+  }
+>>>>>>> 698582f (Squashed 'plugins/experimentation/' content from commit 0356a22)
 }

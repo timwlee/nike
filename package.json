@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "@adobe/aem-boilerplate",
   "private": true,
   "version": "1.3.0",
@@ -39,4 +40,46 @@
   "dependencies": {
     "jsdom": "^16.7.0"
   }
+=======
+  "name": "@adobe/aem-experimentation",
+  "version": "1.0.4",
+  "main": "src/index.js",
+  "scripts": {
+    "lint:js": "eslint src",
+    "lint:css": "stylelint src/**/*.css",
+    "lint": "npm run lint:js && npm run lint:css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/adobe/aem-experimentation.git"
+  },
+  "author": "Adobe Inc.",
+  "license": "Apache-2.0",
+  "keywords": [
+    "aem",
+    "experimentation",
+    "experience",
+    "decisioning",
+    "plugin",
+    "campaigns",
+    "audiences"
+  ],
+  "bugs": {
+    "url": "https://github.com/adobe/aem-experimentation/issues"
+  },
+  "homepage": "https://github.com/adobe/aem-experimentation#readme",
+  "devDependencies": {
+    "@babel/eslint-parser": "7.22.15",
+    "@semantic-release/changelog": "6.0.3",
+    "@semantic-release/git": "10.0.1",
+    "@semantic-release/npm": "12.0.1",
+    "eslint": "8.48.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-plugin-import": "2.28.1",
+    "semantic-release": "23.1.1",
+    "stylelint": "15.10.3",
+    "stylelint-config-standard": "34.0.0"
+  },
+  "private": true
+>>>>>>> 698582f (Squashed 'plugins/experimentation/' content from commit 0356a22)
 }
