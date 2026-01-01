@@ -1,15 +1,3 @@
-
-// Define an execution context
-const pluginContext = {
-  getAllMetadata,
-  getMetadata,
-  loadCSS,
-  loadScript,
-  sampleRUM,
-  toCamelCase,
-  toClassName,
-};
-
 import {
   loadHeader,
   loadFooter,
@@ -316,10 +304,7 @@ async function renderWBDataLayer() {
  * @param {Element} doc The container element
  */
 async function loadEager(doc) {
-
-}
-
-setPageLanguage();
+  setPageLanguage();
   // Preconnect dynamically to speed up LCP fetch without hardcoding hosts
   try {
     addPreconnect(window.location.origin);
@@ -350,11 +335,11 @@ setPageLanguage();
   }
 }
 
-
-//  * Create section background image
-//  *
-//  * @param {*} doc
-//  */
+/**
+ * Create section background image
+ *
+ * @param {*} doc
+ */
 // function decorateSectionImages(doc) {
 //   const sectionImgContainers = doc.querySelectorAll('main .section[data-image]');
 //   sectionImgContainers.forEach((sectionImgContainer) => {
@@ -394,10 +379,10 @@ setPageLanguage();
 //   });
 // }
 
-// /**
-//  * Loads everything that doesn't need to be delayed.
-//  * @param {Element} doc The container element
-//  */
+/**
+ * Loads everything that doesn't need to be delayed.
+ * @param {Element} doc The container element
+ */
 async function loadLazy(doc) {
   const main = doc.querySelector('main');
   await loadSections(main);
@@ -410,7 +395,6 @@ async function loadLazy(doc) {
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();
-
 }
 
 
