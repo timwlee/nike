@@ -350,11 +350,11 @@ setPageLanguage();
   }
 }
 
-/**
- * Create section background image
- *
- * @param {*} doc
- */
+
+//  * Create section background image
+//  *
+//  * @param {*} doc
+//  */
 // function decorateSectionImages(doc) {
 //   const sectionImgContainers = doc.querySelectorAll('main .section[data-image]');
 //   sectionImgContainers.forEach((sectionImgContainer) => {
@@ -394,10 +394,10 @@ setPageLanguage();
 //   });
 // }
 
-/**
- * Loads everything that doesn't need to be delayed.
- * @param {Element} doc The container element
- */
+// /**
+//  * Loads everything that doesn't need to be delayed.
+//  * @param {Element} doc The container element
+//  */
 async function loadLazy(doc) {
   const main = doc.querySelector('main');
   await loadSections(main);
