@@ -556,6 +556,10 @@
           {
             "name": "Image Bottom",
             "value": "image-bottom"
+          },
+          {
+            "name": "Nike Card",
+            "value": "nike-cf-style"
           }
         ]
       },
