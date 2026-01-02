@@ -307,17 +307,11 @@
 
 .content-fragment-wrapper .content-fragment .banner-content.nike-cf-style .banner-detail .cfdescription {
   color: white;
+  display: none;
 }
 
 .content-fragment-wrapper .content-fragment .banner-content.nike-cf-style .banner-detail .cftitle::after {
- /*  background-color: white;
-  content: "";
-  display: block;
-  height: 5px;
-  margin: auto;
-  transition: width .4s ease-in-out;
-  width: 128px;
-  margin: 10px auto; */
+  display: none;
 }
 
 
