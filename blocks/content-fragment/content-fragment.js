@@ -255,7 +255,7 @@ export default async function decorate(block) {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
-                graphQLPath: `${aempublishurl.replace('publish', 'author')}${CONFIG.GRAPHQL_QUERY_CTALISTBYTAG};tag=${tags}`,
+                graphQLPath: `${aempublishurl}${CONFIG.GRAPHQL_QUERY_CTALISTBYTAG};tag=${tags}`,
                 cfPath: dynamicCTAListPath,
                 variation: variationName,
               })
