@@ -273,14 +273,14 @@ export default async function decorate(block) {
         }
 
 
-        // let ctaData = await ctaResponse.json(); 
-        // const ctas = ctaData?.data?.ctaList?.items || [];
+        let ctaData = await ctaResponse.json(); 
+        const ctas = ctaData?.data?.ctaList?.items || [];
 
         
         // FOR LOCAL DEVELOPMENT TESTING ONLY - REMOVE LATER
-        const nikeJSONResponse = await fetch('/blocks/content-fragment/nike.json');
-        const nikeJSON = await nikeJSONResponse.json();
-        const ctas = nikeJSON?.data?.ctaList?.items || [];
+        // const nikeJSONResponse = await fetch('/blocks/content-fragment/nike.json');
+        // const nikeJSON = await nikeJSONResponse.json();
+        // const ctas = nikeJSON?.data?.ctaList?.items || [];
 
 
         console.log('CTAs:', ctas);
@@ -379,10 +379,8 @@ export default async function decorate(block) {
                 </div>
             </div>`;
         
-        console.log("div:", div);
-        // console.log("block:", block);
-        const wrapper = block.parentElement;
-        wrapper.appendChild(div);
+          block.classList.add('dynamic-cta-list');
+          block.appendChild(div);
         }
 
         // Render the list of CTAs using exactly the same HTML and logic From single CTA rendering logic
