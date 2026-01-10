@@ -66,7 +66,7 @@ async function renderCTAByTag(block, tag, isAuthor, contentPath, variationname, 
 
         // LOCAL DEVELOPMENT TESTING ONLY
         // const cfReq = {"title":"College Football","subtitle":"Nike gear for your favorite teams","description":{"plaintext":"Shop the latest college football gear this season"},"__typename":"CtaModel","_model":{"_path":"/conf/ref-demo-eds/settings/dam/cfm/models/cta","_id":null,"title":"CTA"},"_variation":"master","bannerimage":{"_authorUrl":"https://author-p178552-e1883614.adobeaemcloud.com/content/dam/nike/en/category/offers/imgi_22_nike-just-do-it.jpg","_publishUrl":"https://publish-p178552-e1883614.adobeaemcloud.com/content/dam/nike/en/category/offers/imgi_22_nike-just-do-it.jpg","_smartCrops":[{"name":"Swatch"},{"name":"54vert"},{"name":"169banner"},{"name":"11square"}],"_dmS7Url":"https://s7d1.scene7.com/is/image/Cherneff/imgi_22_nike-just-do-it-1","_dynamicUrl":"/adobe/dynamicmedia/deliver/dm-aid--dd50df2e-ab6f-4a85-a4f9-b9d1c2242f45/imgi_22_nike_just_do_it.jpg"},"_path":"/content/dam/nike/en/fragments/fragment-four-category","ctalabel":"Shop Football","ctaurl":{"_path":"/content/nike/language-masters/en","_authorUrl":"https://author-p178552-e1883614.adobeaemcloud.com/content/nike/language-masters/en.html"},"_tags":["nike:sports/football"]};
-        const cfReq = offer?.data?.ctaByPath?.items[0];
+        const cfReq = offer?.data?.ctaList?.items[0];
 
         if (!cfReq) {
           console.error('Error parsing response from GraphQL request - no valid data found', {
