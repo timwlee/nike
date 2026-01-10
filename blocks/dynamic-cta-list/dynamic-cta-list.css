@@ -7,12 +7,16 @@
   height: auto;
 }
 
-.dynamic-cta-list-wrapper .content-fragment {
+.dynamic-cta-list-wrapper .dynamic-cta-list {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
 }
 
-.dynamic-cta-list-wrapper .content-fragment .banner-content {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content {
   position: relative;
   width: 100%;
   height: 100%;
@@ -20,7 +24,7 @@
   margin: 0;
 }
 
-.dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content .banner-detail {
   box-sizing: border-box;
   width: 100%;
   height: 100%;
@@ -39,11 +43,11 @@
   align-items: center;
 }
 
-.dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail p {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content .banner-detail p {
   margin: 10px 0;
 }
 
-.dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail .cfsubtitle {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content .banner-detail .cfsubtitle {
   font-size: 20px;
   line-height: 30px;
   padding: 0;
@@ -51,13 +55,13 @@
   font-family: var(--heading-font-family);
 }
 
-.dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail .cftitle {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content .banner-detail .cftitle {
   margin: 0;
   font-size: 30px;
   line-height: 50px;
   font-family: var(--black-font-family);
 }
-.dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail .cftitle::after {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content .banner-detail .cftitle::after {
   background-color: var(--main-accent-color);
   content: "";
   display: block;
@@ -69,7 +73,7 @@
 }
 
 
-.dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail .cfdescription {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content .banner-detail .cfdescription {
   margin: 20px 0;
   font-size: 16px;
   line-height: 24px;
@@ -77,11 +81,11 @@
 }
 
 /* ensure richtext container doesn't add extra spacing when wrapping <p> */
-.dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail .cfdescription p {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content .banner-detail .cfdescription p {
   margin: 0;
 }
 
-.dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail a {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content .banner-detail a {
   display: inline-block;
   padding: 0;
   background-color: white;
@@ -98,7 +102,7 @@
   cursor: pointer;
   padding: 10px;;
 }
-.dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail a::after {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content .banner-detail a::after {
   font-family: 'Font Awesome 5 Solid';
   content: "\f105";
   color: var(--text-light);
@@ -117,7 +121,7 @@
 }
 
 /* Image Left Layout - Image on left, text on right */
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-left {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-left {
   display: flex;
   flex-direction: row;
   align-items: stretch;
@@ -128,7 +132,7 @@
   position: relative;
 }
 
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-left::before {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-left::before {
   content: '';
   position: absolute;
   top: 0;
@@ -141,7 +145,7 @@
   z-index: 1;
 }
 
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-left .banner-detail {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-left .banner-detail {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -156,7 +160,7 @@
 }
 
 /* Image Right Layout - Image on right, text on left */
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-right {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-right {
   display: flex;
   flex-direction: row;
   align-items: stretch;
@@ -167,7 +171,7 @@
   position: relative;
 }
 
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-right::before {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-right::before {
   content: '';
   position: absolute;
   top: 0;
@@ -180,7 +184,7 @@
   z-index: 1;
 }
 
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-right .banner-detail {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-right .banner-detail {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -195,7 +199,7 @@
 }
 
 /* Image Top Layout - Image on top, text on bottom */
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-top {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-top {
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -206,7 +210,7 @@
   position: relative;
 }
 
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-top .banner-detail {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -221,7 +225,7 @@
 }
 
 /* Image Bottom Layout - Text on top, image on bottom */
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-bottom {
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -232,7 +236,7 @@
   position: relative;
 }
 
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-bottom .banner-detail {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -262,7 +266,7 @@
     src: url(../../fonts/HelveticaNowTextMedium.woff2) format('woff2');
     src: url(../../fonts/helvetica-now-text-medium.ttf) format('ttf')
 }
-.dynamic-cta-list-wrapper .content-fragment .banner-content.nike-cf-style {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.nike-cf-style {
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -273,7 +277,7 @@
   position: relative;
 }
 
-.dynamic-cta-list-wrapper .content-fragment .banner-content.nike-cf-style.banner-detail {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.nike-cf-style.banner-detail {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -287,7 +291,7 @@
   margin-bottom: 56%
 }
 
-.dynamic-cta-list-wrapper .content-fragment .banner-content.nike-cf-style .banner-detail .cftitle {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.nike-cf-style .banner-detail .cftitle {
   font-family: 'Futura ND', 'Futura PT', 'Avenir Next', 'Arial', 'Helvetica Neue', Arial, Helvetica, sans-serif !important;
   font-weight: 800 !important;
   font-size: 40px;
@@ -299,73 +303,73 @@
   color: #fff;
 }
 
-.dynamic-cta-list-wrapper .content-fragment .banner-content.nike-cf-style .banner-detail .cfsubtitle {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.nike-cf-style .banner-detail .cfsubtitle {
   color: white;
   font-family: 'Helvetica Now Text Medium', Arial, Helvetica, sans-serif !important;
   font-weight: 500!important;
   font-size: 16px;
 }
 
-.dynamic-cta-list-wrapper .content-fragment .banner-content.nike-cf-style .banner-detail .cfdescription {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.nike-cf-style .banner-detail .cfdescription {
   color: white;
   display: none;
 }
 
-.dynamic-cta-list-wrapper .content-fragment .banner-content.nike-cf-style .banner-detail .cftitle::after {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.nike-cf-style .banner-detail .cftitle::after {
   display: none;
 }
 
 
 /* Common styles for all image layouts */
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-left .banner-detail .cftitle,
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-right .banner-detail .cftitle,
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail .cftitle,
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail .cftitle {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-left .banner-detail .cftitle,
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-right .banner-detail .cftitle,
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-top .banner-detail .cftitle,
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-bottom .banner-detail .cftitle {
   color: var(--text-color);
 }
 
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-left .banner-detail .cfsubtitle,
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-right .banner-detail .cfsubtitle,
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail .cfsubtitle,
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail .cfsubtitle {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-left .banner-detail .cfsubtitle,
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-right .banner-detail .cfsubtitle,
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-top .banner-detail .cfsubtitle,
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-bottom .banner-detail .cfsubtitle {
   color: #666;
 }
 
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-left .banner-detail .cfdescription,
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-right .banner-detail .cfdescription,
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail .cfdescription,
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail .cfdescription {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-left .banner-detail .cfdescription,
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-right .banner-detail .cfdescription,
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-top .banner-detail .cfdescription,
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-bottom .banner-detail .cfdescription {
   color: var(--text-color);
   width: 100%;
   /* text-align: left; */
 }
 
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-left .banner-detail a,
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-right .banner-detail a,
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail a,
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail a
-.dynamic-cta-list-wrapper .content-fragment .banner-content.nike-cf-style .banner-detail a {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-left .banner-detail a,
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-right .banner-detail a,
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-top .banner-detail a,
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-bottom .banner-detail a
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.nike-cf-style .banner-detail a {
   /* text-align: left; */ 
   /* align-self: flex-start; */
   color: black !important;
 }
 
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-left .banner-detail a::after,
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-right .banner-detail a::after,
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail a::after,
-dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail a::after
-.dynamic-cta-list-wrapper .content-fragment .banner-content.nike-cf-style .banner-detail a::after {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-left .banner-detail a::after,
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-right .banner-detail a::after,
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-top .banner-detail a::after,
+dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-bottom .banner-detail a::after
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.nike-cf-style .banner-detail a::after {
   color: var(--text-color);
 }
 
 /* Override text alignment for top/bottom layouts */
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail .cfdescription,
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail .cfdescription {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-top .banner-detail .cfdescription,
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-bottom .banner-detail .cfdescription {
   text-align: center;
 }
 
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail a,
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail a {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-top .banner-detail a,
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-bottom .banner-detail a {
   text-align: center;
   align-self: center;
 }
@@ -373,29 +377,29 @@ dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-
 /* Responsive Styles */
 @media (width < 1024px) {
 
-  .content-fragment-container .dynamic-cta-list-wrapper {
+  .dynamic-cta-list-container .dynamic-cta-list-wrapper {
     padding: 0;
   }
-  .content-fragment-container .dynamic-cta-list-wrapper .content-fragment {
+  .dynamic-cta-list-container .dynamic-cta-list-wrapper .dynamic-cta-list {
     display: block;
   }
 
-  .content-fragment-container .dynamic-cta-list-wrapper .content-fragment .banner-content {
+  .dynamic-cta-list-container .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content {
     display: flex;
   }
-  .content-fragment-container .dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail {
+  .dynamic-cta-list-container .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content .banner-detail {
     padding: 10px;
   }
 
-  .content-fragment-container .dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail .cftitle {
+  .dynamic-cta-list-container .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content .banner-detail .cftitle {
     font-size: 25px;
     font-family: var(--heading-font-family);
   }
-  .content-fragment-container .dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail .cfsubtitle {
+  .dynamic-cta-list-container .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content .banner-detail .cfsubtitle {
     font-size: 20px;
     font-family: var(--heading-font-family);
   }
-  .content-fragment-container .dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail .cfdescription {
+  .dynamic-cta-list-container .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content .banner-detail .cfdescription {
     width: 90%;
   }
 }
@@ -403,7 +407,7 @@ dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-
 
 @media (width < 768px) {
 
-  .content-fragment-container .dynamic-cta-list-wrapper {
+  .dynamic-cta-list-container .dynamic-cta-list-wrapper {
     padding: 0;
   }
   
@@ -411,23 +415,23 @@ dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-
 
 /* Responsive styles for all image layouts */
 @media (width < 1024px) {
-  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-left,
-  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-right,
-  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-top,
-  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom {
+  .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-left,
+  .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-right,
+  .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-top,
+  .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-bottom {
     flex-direction: column;
     background-position: center top;
   }
   
-  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-left::before,
-  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-right::before {
+  .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-left::before,
+  .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-right::before {
     width: 100%;
     height: 300px;
     position: relative;
   }
   
-  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-left .banner-detail,
-  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-right .banner-detail {
+  .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-left .banner-detail,
+  .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-right .banner-detail {
     margin-left: 0;
     margin-right: 0;
     margin-top: 0;
@@ -438,51 +442,51 @@ dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-
   }
   
   /* Keep original margins for top/bottom layouts on tablet */
-  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail,
-  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail {
+  .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-top .banner-detail,
+  .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-bottom .banner-detail {
     padding: 40px 20px;
     text-align: center;
     align-items: center;
   }
   
-  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-left .banner-detail .cfdescription,
-  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-right .banner-detail .cfdescription,
-  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail .cfdescription,
-  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail .cfdescription {
+  .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-left .banner-detail .cfdescription,
+  .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-right .banner-detail .cfdescription,
+  .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-top .banner-detail .cfdescription,
+  .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-bottom .banner-detail .cfdescription {
     text-align: center;
   }
   
-  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-left .banner-detail a,
-  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-right .banner-detail a,
-  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail a,
-  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail a {
+  .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-left .banner-detail a,
+  .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-right .banner-detail a,
+  .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-top .banner-detail a,
+  .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-bottom .banner-detail a {
     text-align: center;
     align-self: center;
   }
 }
 
 @media (width < 768px) {
-  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-left::before,
-  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-right::before {
+  .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-left::before,
+  .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-right::before {
     height: 200px;
   }
   
-  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-left .banner-detail,
-  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-right .banner-detail,
-  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail,
-  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail {
+  .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-left .banner-detail,
+  .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-right .banner-detail,
+  .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-top .banner-detail,
+  .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-bottom .banner-detail {
     padding: 30px 15px;
   }
   
   /* Fix mobile image visibility for top/bottom layouts */
-  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-top {
+  .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-top {
     background-size: contain !important;
     background-position: center top !important;
     background-repeat: no-repeat !important;
     min-height: 400px !important;
   }
   
-  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom {
+  .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-bottom {
     background-size: contain !important;
     background-position: center bottom !important;
     background-repeat: no-repeat !important;
@@ -490,55 +494,55 @@ dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-
   }
   
   /* Adjust margins for mobile to ensure image visibility */
-  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail {
+  .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-top .banner-detail {
     margin-top: 200px !important;
   }
   
-  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail {
+  .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-bottom .banner-detail {
     margin-bottom: 200px !important;
   }
 }
 
 /* Alignment Styles */
-.dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail.text-left {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content .banner-detail.text-left {
   text-align: left;
   align-items: flex-start;
 }
 
-.dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail.text-right {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content .banner-detail.text-right {
   text-align: right;
   align-items: flex-end;
 }
 
-.dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail.text-center {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content .banner-detail.text-center {
   text-align: center;
   align-items: center;
 }
 /*for top and bottom layouts*/
 /* Override text alignment for top/bottom layouts */
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail.text-left .cfdescription,
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail.text-left .cfdescription {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-top .banner-detail.text-left .cfdescription,
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-bottom .banner-detail.text-left .cfdescription {
   text-align: left;
 }
 
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail.text-left a,
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail.text-left a {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-top .banner-detail.text-left a,
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-bottom .banner-detail.text-left a {
   text-align: left;
   align-self: flex-start;
 }
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail.text-right .cfdescription,
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail.text-right .cfdescription {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-top .banner-detail.text-right .cfdescription,
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-bottom .banner-detail.text-right .cfdescription {
   text-align: right;
 }
 
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail.text-right a,
-.dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail.text-right a {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-top .banner-detail.text-right a,
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-bottom .banner-detail.text-right a {
   text-align: right;
   align-self: flex-end;
 }
-.dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail.text-left .cftitle::after {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content .banner-detail.text-left .cftitle::after {
   margin-left: 0;
 }
-.dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail.text-right .cftitle::after {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content .banner-detail.text-right .cftitle::after {
   margin-right: 0;
 }
