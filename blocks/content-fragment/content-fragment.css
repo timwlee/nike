@@ -543,10 +543,3 @@ content-fragment-wrapper .content-fragment .banner-content.image-bottom .banner-
 .content-fragment-wrapper .content-fragment .banner-content .banner-detail.text-right .cftitle::after {
   margin-right: 0;
 }
-
-
-.content-fragment.block.dynamic-cta-list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}

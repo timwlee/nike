@@ -6838,5 +6838,24 @@
         "condition": { "==": [{ "var": "enableSubmitAction" }, true] }
       }
     ]
+  },
+  {
+    "id": "dynamic-cta-list",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "Tag Selector",
+        "label": "Tag(s) Selector",
+        "valueType": "array",
+        "value": [""],
+        "options": [
+          { "name": "nike:sports/basketball", "value": "1" },
+          { "name": "nike:sports/football", "value": "2" },
+          { "name": "nike:sports/liesure", "value": "3" },
+          { "name": "nike:sports/running", "value": "4" },
+          { "name": "nike:sports/soccer", "value": "5" }
+        ]
+      }
+    ]
   }
 ]

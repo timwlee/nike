@@ -1,0 +1,544 @@
+
+.dynamic-cta-list-container .dynamic-cta-list-wrapper {
+  width: 100%;
+  max-width: initial;
+  margin: 0 auto;
+  display: block;
+  height: auto;
+}
+
+.dynamic-cta-list-wrapper .content-fragment {
+  width: 100%;
+  height: 100%;
+}
+
+.dynamic-cta-list-wrapper .content-fragment .banner-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block;
+  margin: 0;
+}
+
+.dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  display: block;
+  background-size: cover;
+  background-position: center;
+  margin: 0;
+  padding: 60px;
+  color: var(--text-light);
+  border-radius: inherit;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail p {
+  margin: 10px 0;
+}
+
+.dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail .cfsubtitle {
+  font-size: 20px;
+  line-height: 30px;
+  padding: 0;
+  margin: 0;
+  font-family: var(--heading-font-family);
+}
+
+.dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail .cftitle {
+  margin: 0;
+  font-size: 30px;
+  line-height: 50px;
+  font-family: var(--black-font-family);
+}
+.dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail .cftitle::after {
+  background-color: var(--main-accent-color);
+  content: "";
+  display: block;
+  height: 5px;
+  margin: auto;
+  transition: width .4s ease-in-out;
+  width: 128px;
+  margin: 10px auto;
+}
+
+
+.dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail .cfdescription {
+  margin: 20px 0;
+  font-size: 16px;
+  line-height: 24px;
+  width: 60%;
+}
+
+/* ensure richtext container doesn't add extra spacing when wrapping <p> */
+.dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail .cfdescription p {
+  margin: 0;
+}
+
+.dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail a {
+  display: inline-block;
+  padding: 0;
+  background-color: white;
+  color: black;
+  text-decoration: none;
+  outline: none;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  font-family: var(--heading-font-family);
+  line-height: 14px;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  padding: 10px;;
+}
+.dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail a::after {
+  font-family: 'Font Awesome 5 Solid';
+  content: "\f105";
+  color: var(--text-light);
+  font-size: 16px;
+  font-weight: 100;
+  width: 15px;
+  height: 20px;
+  float: right;
+  margin-left: 0;
+  margin-top: 0;
+  border: none;
+  border-radius: 0;
+  padding: 1px 10px;
+  cursor: pointer;
+  display: none;
+}
+
+/* Image Left Layout - Image on left, text on right */
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-left {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  min-height: 400px;
+  background-size: cover;
+  background-position: left center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-left::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: inherit;
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-left .banner-detail {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  padding: 60px;
+  background: var(--light-color);
+  position: relative;
+  z-index: 2;
+  margin-left: 50%;
+}
+
+/* Image Right Layout - Image on right, text on left */
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-right {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  min-height: 400px;
+  background-size: cover;
+  background-position: right center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-right::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background: inherit;
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-right .banner-detail {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  padding: 60px;
+  background: var(--light-color);
+  position: relative;
+  z-index: 2;
+  margin-right: 50%;
+}
+
+/* Image Top Layout - Image on top, text on bottom */
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-top {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-height: 400px;
+  background-size: contain;
+  background-position: center top;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 60px;
+  background: var(--light-color);
+  position: relative;
+  z-index: 2;
+  margin-top: 50%;
+}
+
+/* Image Bottom Layout - Text on top, image on bottom */
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-height: 400px;
+  background-size: contain;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 60px;
+  background: var(--light-color);
+  position: relative;
+  z-index: 2;
+  margin-bottom: 50%;
+}
+
+/* Nike CF Style */
+
+@font-face {
+    font-family: "Helvetica Now Text";
+    font-style: normal;
+    font-weight: 400;
+    src: url(../../fonts/HelveticaNowText.woff2) format('woff2')
+}
+
+@font-face {
+    font-family: "Helvetica Now Text Medium";
+    font-style: normal;
+    font-weight: 400;
+    src: url(../../fonts/HelveticaNowTextMedium.woff2) format('woff2');
+    src: url(../../fonts/helvetica-now-text-medium.ttf) format('ttf')
+}
+.dynamic-cta-list-wrapper .content-fragment .banner-content.nike-cf-style {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-height: 400px;
+  background-size: contain;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.dynamic-cta-list-wrapper .content-fragment .banner-content.nike-cf-style.banner-detail {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 60px;
+  background: var(--light-color);
+  position: relative;
+  z-index: 2;
+  margin-bottom: 56%
+}
+
+.dynamic-cta-list-wrapper .content-fragment .banner-content.nike-cf-style .banner-detail .cftitle {
+  font-family: 'Futura ND', 'Futura PT', 'Avenir Next', 'Arial', 'Helvetica Neue', Arial, Helvetica, sans-serif !important;
+  font-weight: 800 !important;
+  font-size: 40px;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  transform: scaleY(1.2);
+  margin: 0 0 0.3rem 0;
+  color: #fff;
+}
+
+.dynamic-cta-list-wrapper .content-fragment .banner-content.nike-cf-style .banner-detail .cfsubtitle {
+  color: white;
+  font-family: 'Helvetica Now Text Medium', Arial, Helvetica, sans-serif !important;
+  font-weight: 500!important;
+  font-size: 16px;
+}
+
+.dynamic-cta-list-wrapper .content-fragment .banner-content.nike-cf-style .banner-detail .cfdescription {
+  color: white;
+  display: none;
+}
+
+.dynamic-cta-list-wrapper .content-fragment .banner-content.nike-cf-style .banner-detail .cftitle::after {
+  display: none;
+}
+
+
+/* Common styles for all image layouts */
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-left .banner-detail .cftitle,
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-right .banner-detail .cftitle,
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail .cftitle,
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail .cftitle {
+  color: var(--text-color);
+}
+
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-left .banner-detail .cfsubtitle,
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-right .banner-detail .cfsubtitle,
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail .cfsubtitle,
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail .cfsubtitle {
+  color: #666;
+}
+
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-left .banner-detail .cfdescription,
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-right .banner-detail .cfdescription,
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail .cfdescription,
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail .cfdescription {
+  color: var(--text-color);
+  width: 100%;
+  /* text-align: left; */
+}
+
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-left .banner-detail a,
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-right .banner-detail a,
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail a,
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail a
+.dynamic-cta-list-wrapper .content-fragment .banner-content.nike-cf-style .banner-detail a {
+  /* text-align: left; */ 
+  /* align-self: flex-start; */
+  color: black !important;
+}
+
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-left .banner-detail a::after,
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-right .banner-detail a::after,
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail a::after,
+dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail a::after
+.dynamic-cta-list-wrapper .content-fragment .banner-content.nike-cf-style .banner-detail a::after {
+  color: var(--text-color);
+}
+
+/* Override text alignment for top/bottom layouts */
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail .cfdescription,
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail .cfdescription {
+  text-align: center;
+}
+
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail a,
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail a {
+  text-align: center;
+  align-self: center;
+}
+
+/* Responsive Styles */
+@media (width < 1024px) {
+
+  .content-fragment-container .dynamic-cta-list-wrapper {
+    padding: 0;
+  }
+  .content-fragment-container .dynamic-cta-list-wrapper .content-fragment {
+    display: block;
+  }
+
+  .content-fragment-container .dynamic-cta-list-wrapper .content-fragment .banner-content {
+    display: flex;
+  }
+  .content-fragment-container .dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail {
+    padding: 10px;
+  }
+
+  .content-fragment-container .dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail .cftitle {
+    font-size: 25px;
+    font-family: var(--heading-font-family);
+  }
+  .content-fragment-container .dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail .cfsubtitle {
+    font-size: 20px;
+    font-family: var(--heading-font-family);
+  }
+  .content-fragment-container .dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail .cfdescription {
+    width: 90%;
+  }
+}
+
+
+@media (width < 768px) {
+
+  .content-fragment-container .dynamic-cta-list-wrapper {
+    padding: 0;
+  }
+  
+}
+
+/* Responsive styles for all image layouts */
+@media (width < 1024px) {
+  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-left,
+  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-right,
+  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-top,
+  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom {
+    flex-direction: column;
+    background-position: center top;
+  }
+  
+  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-left::before,
+  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-right::before {
+    width: 100%;
+    height: 300px;
+    position: relative;
+  }
+  
+  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-left .banner-detail,
+  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-right .banner-detail {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 40px 20px;
+    text-align: center;
+    align-items: center;
+  }
+  
+  /* Keep original margins for top/bottom layouts on tablet */
+  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail,
+  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail {
+    padding: 40px 20px;
+    text-align: center;
+    align-items: center;
+  }
+  
+  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-left .banner-detail .cfdescription,
+  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-right .banner-detail .cfdescription,
+  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail .cfdescription,
+  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail .cfdescription {
+    text-align: center;
+  }
+  
+  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-left .banner-detail a,
+  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-right .banner-detail a,
+  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail a,
+  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail a {
+    text-align: center;
+    align-self: center;
+  }
+}
+
+@media (width < 768px) {
+  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-left::before,
+  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-right::before {
+    height: 200px;
+  }
+  
+  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-left .banner-detail,
+  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-right .banner-detail,
+  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail,
+  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail {
+    padding: 30px 15px;
+  }
+  
+  /* Fix mobile image visibility for top/bottom layouts */
+  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-top {
+    background-size: contain !important;
+    background-position: center top !important;
+    background-repeat: no-repeat !important;
+    min-height: 400px !important;
+  }
+  
+  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom {
+    background-size: contain !important;
+    background-position: center bottom !important;
+    background-repeat: no-repeat !important;
+    min-height: 400px !important;
+  }
+  
+  /* Adjust margins for mobile to ensure image visibility */
+  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail {
+    margin-top: 200px !important;
+  }
+  
+  .dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail {
+    margin-bottom: 200px !important;
+  }
+}
+
+/* Alignment Styles */
+.dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail.text-left {
+  text-align: left;
+  align-items: flex-start;
+}
+
+.dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail.text-right {
+  text-align: right;
+  align-items: flex-end;
+}
+
+.dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail.text-center {
+  text-align: center;
+  align-items: center;
+}
+/*for top and bottom layouts*/
+/* Override text alignment for top/bottom layouts */
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail.text-left .cfdescription,
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail.text-left .cfdescription {
+  text-align: left;
+}
+
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail.text-left a,
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail.text-left a {
+  text-align: left;
+  align-self: flex-start;
+}
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail.text-right .cfdescription,
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail.text-right .cfdescription {
+  text-align: right;
+}
+
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-top .banner-detail.text-right a,
+.dynamic-cta-list-wrapper .content-fragment .banner-content.image-bottom .banner-detail.text-right a {
+  text-align: right;
+  align-self: flex-end;
+}
+.dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail.text-left .cftitle::after {
+  margin-left: 0;
+}
+.dynamic-cta-list-wrapper .content-fragment .banner-content .banner-detail.text-right .cftitle::after {
+  margin-right: 0;
+}
