@@ -14,7 +14,7 @@ async function renderCTAByTag(block, tag, isAuthor, contentPath, variationname, 
   	// Prepare request configuration based on environment
 	const requestConfig = isAuthor 
   ? {
-      url: `${aemauthorurl}${CONFIG.GRAPHQL_QUERY};ts=${Date.now()}`,
+      url: `${aemauthorurl}${CONFIG.GRAPHQL_QUERY};tag=${tag};ts=${Date.now()}`,
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }
     }
