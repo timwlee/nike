@@ -86,7 +86,7 @@ async function mapPublishPath(ctaHref) {
   return ctaHref;
 }
 
-/** Render CTA Content Fragment **/
+/** Render CTA Content Fragment(s) **/
 async function renderCTAByTag(
   block,
   tag,
@@ -105,10 +105,6 @@ async function renderCTAByTag(
     return;
   }
 
-  console.log(
-    `Rendering CTA for tag: ${tag} in ${isAuthor ? 'author' : 'publish'} environment`,
-  );
-
   try {
     const { url, options } = buildRequestConfig({
       isAuthor,
@@ -125,124 +121,98 @@ async function renderCTAByTag(
     if (!response.ok) {
       logAndClear(block, 'Error making CF GraphQL request', {
         status: response.status,
-        contentPath,
-        variationName,
+        tag,
+      });
+      return;
+    }
+
+    const offer = await response.json();
+    const items = offer?.data?.ctaList?.items;
+
+    if (!Array.isArray(items) || !items.length) {
+      console.warn(`No CTA items returned for tag: ${tag}`);
+      return;
+    }
+
+    for (const item of items) {
+      const itemId = item?._path
+        ? `urn:aemconnection:${item._path}`
+        : `urn:aemconnection:${contentPath}/jcr:content/data/${variationName}`;
+
+      const imgUrl = isAuthor
+        ? item.bannerimage?._authorUrl
+        : item.bannerimage?._publishUrl;
+
+      const bannerDetailStyle = `
+        background-image:
+          linear-gradient(90deg, rgba(0,0,0,0.6), rgba(0,0,0,0.1) 80%),
+          url(${imgUrl});
+      `;
+
+      let ctaHref = resolveCtaHref(
+        item?.ctaurl,
         isAuthor,
-      });
-      return;
-    }
+        aemauthorurl,
+        aempublishurl,
+      );
 
-    let offer;
-    try {
-      offer = await response.json();
-    } catch (err) {
-      logAndClear(block, 'Error parsing offer JSON from response', {
-        error: err.message,
-        contentPath,
-        variationName,
-        isAuthor,
-      });
-      return;
-    }
+      if (!isAuthor) {
+        ctaHref = await mapPublishPath(ctaHref);
+      }
 
-    const cfReq = offer?.data?.ctaList?.items?.[0];
+      block.insertAdjacentHTML(
+        'beforeend',
+        `
+        <div class="banner-content ${displayStyle} block"
+          data-aue-resource="${itemId}"
+          data-aue-label="${variationName || 'Elements'}"
+          data-aue-type="reference"
+          data-aue-filter="contentfragment">
 
-    if (!cfReq) {
-      logAndClear(block, 'No valid CTA data found in GraphQL response', {
-        response: offer,
-        contentPath,
-        variationName,
-      });
-      return;
-    }
+          <div class="banner-detail ${alignment}"
+            style="${bannerDetailStyle}"
+            data-aue-prop="bannerimage"
+            data-aue-label="Main Image"
+            data-aue-type="media">
 
-    const itemId = `urn:aemconnection:${contentPath}/jcr:content/data/${variationName}`;
-    const imgUrl = isAuthor
-      ? cfReq.bannerimage?._authorUrl
-      : cfReq.bannerimage?._publishUrl;
+            <h2 data-aue-prop="title" data-aue-type="text" class="cftitle">
+              ${item?.title || ''}
+            </h2>
 
-    const bannerDetailStyle = `background-image: linear-gradient(90deg,rgba(0,0,0,0.6), rgba(0,0,0,0.1) 80%), url(${imgUrl});`;
+            <h3 data-aue-prop="subtitle" data-aue-type="text" class="cfsubtitle">
+              ${item?.subtitle || ''}
+            </h3>
 
-    let ctaHref = resolveCtaHref(
-      cfReq?.ctaurl,
-      isAuthor,
-      aemauthorurl,
-      aempublishurl,
-    );
+            <div data-aue-prop="description" data-aue-type="richtext" class="cfdescription">
+              <p>${item?.description?.plaintext || ''}</p>
+            </div>
 
-    if (!isAuthor) {
-      ctaHref = await mapPublishPath(ctaHref);
-    }
-
-    block.setAttribute('data-aue-type', 'container');
-
-    block.insertAdjacentHTML(
-      'beforeend',
-      `
-      <div class="banner-content ${displayStyle} block"
-        data-aue-resource="${itemId}"
-        data-aue-label="${variationName || 'Elements'}"
-        data-aue-type="reference"
-        data-aue-filter="contentfragment">
-
-        <div class="banner-detail ${alignment}"
-          style="${bannerDetailStyle}"
-          data-aue-prop="bannerimage"
-          data-aue-label="Main Image"
-          data-aue-type="media">
-
-          <h2 data-aue-prop="title" data-aue-label="Title" data-aue-type="text" class="cftitle">
-            ${cfReq?.title || ''}
-          </h2>
-
-          <h3 data-aue-prop="subtitle" data-aue-label="SubTitle" data-aue-type="text" class="cfsubtitle">
-            ${cfReq?.subtitle || ''}
-          </h3>
-
-          <div data-aue-prop="description" data-aue-label="Description" data-aue-type="richtext" class="cfdescription">
-            <p>${cfReq?.description?.plaintext || ''}</p>
+            <p class="button-container ${ctaStyle}">
+              <a href="${ctaHref}" target="_blank" rel="noopener" class="button"
+                data-aue-prop="ctaurl" data-aue-type="reference">
+                <span data-aue-prop="ctalabel" data-aue-type="text">
+                  ${item?.ctalabel || ''}
+                </span>
+              </a>
+            </p>
           </div>
 
-          <p class="button-container ${ctaStyle}">
-            <a href="${ctaHref}"
-              target="_blank"
-              rel="noopener"
-              class="button"
-              data-aue-prop="ctaurl"
-              data-aue-label="Button Link/URL"
-              data-aue-type="reference"
-              data-aue-filter="page">
-
-              <span data-aue-prop="ctalabel" data-aue-label="Button Label" data-aue-type="text">
-                ${cfReq?.ctalabel || ''}
-              </span>
-            </a>
-          </p>
+          <div class="banner-logo"></div>
         </div>
-
-        <div class="banner-logo"></div>
-      </div>
-    `,
-    );
+        `,
+      );
+    }
   } catch (error) {
-    console.error('Error rendering content fragment:', {
-      error: error.message,
-      stack: error.stack,
-      contentPath,
-      variationName,
-      isAuthor,
-    });
+    console.error('Error rendering CTA content fragments', error);
   }
 }
 
 /** Init **/
-
 export default async function decorate(block) {
   const CONFIG = {
     WRAPPER_SERVICE_URL:
       'https://3635370-refdemoapigateway-stage.adobeioruntime.net/api/v1/web/ref-demo-api-gateway/fetch-cf',
     GRAPHQL_QUERY: '/graphql/execute.json/ref-demo-eds/CTAListByTag',
-    EXCLUDED_THEME_KEYS: new Set(['brandSite', 'brandLogo']),
   };
 
   const hostnameFromPlaceholders = await getHostname();
@@ -253,15 +223,20 @@ export default async function decorate(block) {
     ?.replace('author', 'publish')
     ?.replace(/\/$/, '');
 
-  const contentPath = '/content/dam/nike/en/fragments/dynamic-cta-list'; /** Update accordingly **/
-  const variationName = 'master'; /** Default to 'master' **/
-  const displayStyle = block.querySelector(':scope div:nth-child(2) > div')?.textContent?.trim() || '';
-	const alignment = block.querySelector(':scope div:nth-child(3) > div')?.textContent?.trim() || '';
-  const ctaStyle = block.querySelector(':scope div:nth-child(4) > div')?.textContent?.trim() || 'button';
+  const contentPath = '#';
+  const variationName = 'master';
+
+  const displayStyle =
+    block.querySelector(':scope div:nth-child(2) > div')?.textContent?.trim() || '';
+
+  const alignment =
+    block.querySelector(':scope div:nth-child(3) > div')?.textContent?.trim() || '';
+
+  const ctaStyle =
+    block.querySelector(':scope div:nth-child(4) > div')?.textContent?.trim() || 'button';
 
   const tagsList =
-    block.querySelector(':scope div:nth-child(1) > div')?.textContent?.trim() ||
-    '';
+    block.querySelector(':scope div:nth-child(1) > div')?.textContent?.trim() || '';
 
   const tags = tagsList
     .split(',')
@@ -271,7 +246,6 @@ export default async function decorate(block) {
   block.innerHTML = '';
   const isAuthor = isAuthorEnvironment();
 
-  /** no tags → no fetch */
   if (!tags.length) {
     console.warn('Dynamic CTA List: No tags provided. Skipping GraphQL request.');
     return;

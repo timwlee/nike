@@ -471,6 +471,10 @@ pre {
   white-space: pre;
 }
 
+main {
+  margin-top: 120px;
+}
+
 main > div {
   margin: 40px 16px;
 }

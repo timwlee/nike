@@ -250,76 +250,6 @@
   margin-bottom: 50%;
 }
 
-/* Nike CF Style */
-
-@font-face {
-    font-family: "Helvetica Now Text";
-    font-style: normal;
-    font-weight: 400;
-    src: url(../../fonts/HelveticaNowText.woff2) format('woff2')
-}
-
-@font-face {
-    font-family: "Helvetica Now Text Medium";
-    font-style: normal;
-    font-weight: 400;
-    src: url(../../fonts/HelveticaNowTextMedium.woff2) format('woff2');
-    src: url(../../fonts/helvetica-now-text-medium.ttf) format('ttf')
-}
-.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.nike-cf-style {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  min-height: 400px;
-  background-size: contain;
-  background-position: center bottom;
-  background-repeat: no-repeat;
-  position: relative;
-}
-
-.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.nike-cf-style.banner-detail {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 60px;
-  background: var(--light-color);
-  position: relative;
-  z-index: 2;
-  margin-bottom: 56%
-}
-
-.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.nike-cf-style .banner-detail .cftitle {
-  font-family: 'Futura ND', 'Futura PT', 'Avenir Next', 'Arial', 'Helvetica Neue', Arial, Helvetica, sans-serif !important;
-  font-weight: 800 !important;
-  font-size: 40px;
-  line-height: 1.05;
-  letter-spacing: -0.035em;
-  text-transform: uppercase;
-  transform: scaleY(1.2);
-  margin: 0 0 0.3rem 0;
-  color: #fff;
-}
-
-.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.nike-cf-style .banner-detail .cfsubtitle {
-  color: white;
-  font-family: 'Helvetica Now Text Medium', Arial, Helvetica, sans-serif !important;
-  font-weight: 500!important;
-  font-size: 16px;
-}
-
-.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.nike-cf-style .banner-detail .cfdescription {
-  color: white;
-  display: none;
-}
-
-.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.nike-cf-style .banner-detail .cftitle::after {
-  display: none;
-}
-
-
 /* Common styles for all image layouts */
 .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-left .banner-detail .cftitle,
 .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-right .banner-detail .cftitle,
@@ -347,8 +277,7 @@
 .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-left .banner-detail a,
 .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-right .banner-detail a,
 .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-top .banner-detail a,
-.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-bottom .banner-detail a
-.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.nike-cf-style .banner-detail a {
+.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-bottom .banner-detail a {
   /* text-align: left; */ 
   /* align-self: flex-start; */
   color: black !important;
@@ -357,8 +286,7 @@
 .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-left .banner-detail a::after,
 .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-right .banner-detail a::after,
 .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-top .banner-detail a::after,
-dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-bottom .banner-detail a::after
-.dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.nike-cf-style .banner-detail a::after {
+dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-bottom .banner-detail a::after{
   color: var(--text-color);
 }
 
@@ -379,9 +307,6 @@ dynamic-cta-list-wrapper .dynamic-cta-list .banner-content.image-bottom .banner-
 
   .dynamic-cta-list-container .dynamic-cta-list-wrapper {
     padding: 0;
-  }
-  .dynamic-cta-list-container .dynamic-cta-list-wrapper .dynamic-cta-list {
-    display: block;
   }
 
   .dynamic-cta-list-container .dynamic-cta-list-wrapper .dynamic-cta-list .banner-content {
