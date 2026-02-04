@@ -1,5 +1,5 @@
 mountpoints:
   /:
-    url: "https://author-p178552-e1883614.adobeaemcloud.com/bin/franklin.delivery/scherneff/nike/main"
+    url: "https://author-p142507-e1463170.adobeaemcloud.com/bin/franklin.delivery/timwlee/nike/main"
     type: "markup"
     suffix: ".html"
