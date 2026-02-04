@@ -167,10 +167,10 @@ async function renderCTAByTag(
           data-aue-resource="${itemId}"
           data-aue-label="${variationName || 'Elements'}"
           data-aue-type="reference"
-          data-aue-filter="contentfragment">
+          data-aue-filter="contentfragment"
+          style="${bannerDetailStyle}">
 
           <div class="banner-detail ${alignment}"
-            style="${bannerDetailStyle}"
             data-aue-prop="bannerimage"
             data-aue-label="Main Image"
             data-aue-type="media">
