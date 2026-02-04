@@ -6849,11 +6849,78 @@
         "valueType": "array",
         "value":[],
         "options": [
-          { "name": "nike:sports/basketball", "value": "nike:sports/basketball" },
-          { "name": "nike:sports/football", "value": "nike:sports/football" },
-          { "name": "nike:sports/liesure", "value": "nike:sports/liesure" },
-          { "name": "nike:sports/running", "value": "nike:sports/running" },
-          { "name": "nike:sports/soccer", "value": "nike:sports/soccer" }
+          { "name": "nike:basketball", "value": "nike:basketball" },
+          { "name": "nike:soccer", "value": "nike:soccer" },
+          { "name": "nike:running", "value": "nike:running" }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "displaystyle",
+        "label": "Style",
+        "options": [
+          {
+            "name": "default",
+            "value": ""
+          },
+          {
+            "name": "Image Left",
+            "value": "image-left"
+          },
+          {
+            "name": "Image Right",
+            "value": "image-right"
+          },
+          {
+            "name": "Image Top",
+            "value": "image-top"
+          },
+          {
+            "name": "Image Bottom",
+            "value": "image-bottom"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "alignment",
+        "label": "Alignment",
+        "options": [
+          {
+            "name": "Text Left",
+            "value": "text-left"
+          },
+          {
+            "name": "Text Right",
+            "value": "text-right"
+          },
+          {
+            "name": "Text Center",
+            "value": "text-center"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "ctastyle",
+        "label": "CTA Style",
+        "options": [
+         {
+            "name": "Link",
+            "value": "cta-link"
+          },
+          {
+            "name": "Primary Button",
+            "value": "cta-button"
+          },
+          {
+            "name": "Secondary Button",
+            "value": "cta-button-secondary"
+          },
+          {
+            "name": "Dark Button",
+            "value": "cta-button-dark"
+          }
         ]
       }
     ]
