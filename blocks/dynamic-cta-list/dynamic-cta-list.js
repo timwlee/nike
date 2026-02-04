@@ -143,11 +143,34 @@ async function renderCTAByTag(
         ? item.bannerimage?._authorUrl
         : item.bannerimage?._publishUrl;
 
-      const bannerDetailStyle = `
-        background-image:
-          linear-gradient(90deg, rgba(0,0,0,0.6), rgba(0,0,0,0.1) 80%),
-          url(${imgUrl});
-      `;
+
+      // Determine the layout style
+      const isImageLeft = displayStyle === 'image-left';
+      const isImageRight = displayStyle === 'image-right';
+      const isImageTop = displayStyle === 'image-top';
+      const isImageBottom = displayStyle === 'image-bottom';
+
+      // Set background image and styles based on layout
+      let bannerContentStyle = '';
+      let bannerDetailStyle = '';
+      
+      if (isImageLeft) {
+        // Image-left layout: image on left, text on right
+        bannerContentStyle = 'background-image: url('+imgUrl+');';
+      } else if (isImageRight) {
+        // Image-right layout: image on right, text on left
+        bannerContentStyle = 'background-image: url('+imgUrl+');';
+      } else if (isImageTop) {
+        // Image-top layout: image on top, text on bottom
+        bannerContentStyle = 'background-image: url('+imgUrl+');';
+      } else if (isImageBottom) {
+        // Image-bottom layout: text on top, image on bottom
+        bannerContentStyle = 'background-image: url('+imgUrl+');';
+      }  else {
+        // Default layout: image as background with gradient overlay (original behavior)
+        bannerDetailStyle = 'background-image: linear-gradient(90deg,rgba(0,0,0,0.6), rgba(0,0,0,0.1) 80%) ,url('+imgUrl+');';
+      }
+
 
       let ctaHref = resolveCtaHref(
         item?.ctaurl,
@@ -168,12 +191,13 @@ async function renderCTAByTag(
           data-aue-label="${variationName || 'Elements'}"
           data-aue-type="reference"
           data-aue-filter="contentfragment"
-          style="${bannerDetailStyle}">
+          style="${bannerContentStyle}">
 
           <div class="banner-detail ${alignment}"
             data-aue-prop="bannerimage"
             data-aue-label="Main Image"
-            data-aue-type="media">
+            data-aue-type="media"
+            style="${bannerDetailStyle}">
 
             <h2 data-aue-prop="title" data-aue-type="text" class="cftitle">
               ${item?.title || ''}
